@@ -1,0 +1,52 @@
+{
+  "tutorials": {
+    "tut1": {
+      "topic": "Join To Create Voice Channel Setup",
+      "description": "**Setup:** `$setjtc #voice channel`\nJoin To Create Voice Channel Is Used To Automatically Create Temporary User Manageable Voice Channel, Use The Command `$channel` To Manage Your Personal Channel After Joining The Join To Create Channel, ex. `$channel userlimit 10`"
+    },
+    "tut2": {
+      "topic": "Auto Roles Setup",
+      "description": "**Setup:** `$setautorole true`\nAuto Roles Is Used To Automatically Add Roles To A Member When They Join Your Server, To Add And Remove Auto Roles Use The Command `$autorole` ex. `$autorole @role`, To View All Server Auto Roles Set Use The Command `$autroles` ex. `$autoroles`"
+    },
+    "tut3": {
+      "topic": "Save Roles Setup",
+      "description": "**Setup:** `$setsaveroles true`\nSave Roles Is Used To Save A Members Role When They Leave, When They Join Back Their Old Roles Will Be Automatically Added To Them"
+    },
+    "tut4": {
+      "topic": "Prefix Setup",
+      "description": "**Setup:** `$setprefix $`\nUsed To Set Your Server's Prefix"
+    },
+    "tut5": {
+      "topic": "Auto Respond Setup",
+      "description": "**Setup:** `$autorespond add trigger ; response`\nUsed For Auto Responding To Messages, ex. `$autorespond add scam ; @scam`, `message: scam, bot returns: @scam`, To Remove Triggers Use The Command `$autorespond remove` ex. `$autorespond remove scam`, To View All Triggers Use The Command `$autorespond viewall` ex. `$autorespond viewall`, To Remove All Triggers Use The Command `$autorespond removeall` ex. `$autorespond removeall`"
+    },
+    "tut6": {
+      "topic": "Status Role Setup",
+      "description": "**Setup:** `$setstatusrole true`\nStatus Roles Are Used To Add A Role(s) To A User Who Uses The Server Status Message In Their Custom Status, To Set A Custom Status Go To Your Profile Where You See `Account, User Profile, Privacy & Settings, Etc.` Once There You Should See A Button Called `Set Status` Click It, Now You Should See Multiple Buttons `Online, Idle, Do Not Disturb Invisible` You Should Also See A Button Called `Set A Custom Status`, Click It And Type In Your Server Status Message, To Add A Status Role Use The Command `$statusrole` ex. `$statusrole @role`, To Set Your Server Status Message Use The Command `$setstatusmessage` ex. `$setstatusmessage .gg/scam`, To Reset Your Status Message Do `$setstatusmessage reset`, To View Server Status Message Use The Command `$statusmessage`, To View All Status Roles Use The Command `$statusroles` ex. `$statusroles`"
+    },
+    "tut7": {
+      "topic": "Blacklist Setup",
+      "description": "**Setup:** `$blacklist @scam`\nBlacklisting A User Will Disable Them From Using Scam Bot Until They Are Unblacklisted, To Blacklist A User Use The Command `$blacklist` ex. `$blacklist @scam`, To Unblacklist A User Repeat The Command Again, To See All Blacklisted Users Use The Command `$blacklisted` ex. `$blacklisted`"
+    },
+    "tut8": {
+      "topic": "Welome Setup",
+      "description": "**Setup:** `$setwelcomechannel @channel`\nThis Will Send A Greeting Message To A Member Who Joins, To Set The Server Welcome Message Use The Command `$setwelcomemessage` This Will Present To You A Couple Of Buttons, Read The Embed Description, To View All Welcome Variables Use The Command `$welcomevariables`"
+    },
+    "tut9": {
+      "topic": "AntiMessage Setup",
+      "description": "**Setup:** `$antimessage`\nWhen Enabled This Will Track All Unwhitelisted/Untrsuted Users And Make Sure They Send A Certain Amount Of Set Messages Amount Per Time Limit Set, To Set The Time Limit Use The Comamand `$setupantimessage time` ex. `$setupantimessage time 10`, To Set The Limited Amount Of Messages Per Time Set Use The Command `$setupantimessage messages` ex. `$setupantimessage messages 5`, Doing These 2 Command Will Allow The User To Send Up 5 Messages Every 10 Seconds"
+    },
+    "tut10": {
+      "topic": "Whitelist Setup",
+      "description": "**Setup:** `$whitelist @scam`\nWhitelist A User Specified To Protect Them From Scam Bots Anti Commands, To Set A Whitelist Role, Use The Command `$setwhitelistrole` ex. `$setwhitelistrole @role`, To View The Servers Current Set Whitelist Role Use The Command `$whitelistedrole`"
+    },
+    "tut11": {
+      "topic": "Trust Setup",
+      "description": "**Setup:** `$trust @scam`\nTrust A User Specified To Protect Them And Be Able To Manage Scam Bots Anti Commands, To Set A Trust Role, Use The Command `$settrustrole` ex. `$settrust @role`, To View The Servers Current Set Trust Role Use The Command `$trustedrole`"
+    },
+    "tut12": {
+      "topic": "Reset",
+      "description": "To Reset All Of Your Servers Data In Scam Bots Database Use The Command `$reset` Note* Once Data Has Been Deleted It Can Not Be Retrieved"
+    }
+  }
+}
