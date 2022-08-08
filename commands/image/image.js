@@ -40,7 +40,6 @@ module.exports = {
     }
     let guild = message.guild
 
-
     // Constants
 
     const backId = 'back'
@@ -67,12 +66,21 @@ module.exports = {
       const current = queries.slice(start, start + amount_per_page)[0]
 
       // You can of course customise this embed however you want
+      let img;
+      if(current.pagemap["cse_image"]){
+        img = current.pagemap.cse_image[0].src
+      } else if(current.pagemap["cse_thumbnail"]){
+          img = current.pagemap.cse_thumbnail[0].src
+      } else {
+          img = "https://bitsofco.de/content/images/2018/12/broken-1.png"
+      }
+        console.log(current.pagemap)
       return new MessageEmbed({
         title: `${current.title}`,
         description: `${current.snippet}`,
         url: `${current.link}`,
         image: {
-          url: current.pagemap.cse_image[0].src || current.pagemap.cse_thumbnail[0].src
+          url: img
         }
       }).setFooter(`Showing queries ${start + 1}/${queries.length}`)
     }
@@ -91,7 +99,7 @@ module.exports = {
     // Collect button interactions (when a user clicks a button),
     // but only when the button as clicked by the original message author
     const collector = embedMessage.createMessageComponentCollector({
-      time: 60000,
+      time: 60000*10,
       filter: ({
         user
       }) => user.id === author.id
