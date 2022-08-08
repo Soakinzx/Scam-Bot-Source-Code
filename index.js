@@ -1,4 +1,3 @@
-require('http').createServer((req, res) => res.end('Bot is alive!')).listen(3000)
 
 //member prune
 
@@ -9,6 +8,7 @@ const {
   MessageActionRow,
   MessageButton
 } = require("discord.js")
+const config = require("./json/config.json")
 const moment = require("moment")
 const client = new Discord.Client({
   intents: 32767,
@@ -95,7 +95,6 @@ client.guild_schema = {
   antijoin: false,
   whitelisted: [],
   antimessage: false,
-  antimessage: false,
   antimessage_seconds: 10,
   antimessage_mps: 8,
   whitelistrole: null,
@@ -134,7 +133,6 @@ client.once("ready", async () => {
     url: "https://www.twitch.tv/boredisjustcool"
   });
   let db = require("./Models/Guild")
-  let dbs = await db.find()
   
 })
 client.on("guildCreate", async guild => {
@@ -300,7 +298,7 @@ for (const file of eventFiles) {
 
 const mongoose = require("mongoose");
 mongoose
-  .connect(process.env.mongooseConnectionString, {
+  .connect(config.mongooseConnectionString, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -326,4 +324,4 @@ process.on("uncaughtException", error => {
 })
 
 
-client.login(process.env.token)
+client.login(config.token)
