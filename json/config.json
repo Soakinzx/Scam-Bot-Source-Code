@@ -1,4 +1,6 @@
 {
+  "token": "",
+  "mongooseConnectionString": "",
   "tutorials": {
     "tut1": {
       "topic": "Join To Create Voice Channel Setup",
