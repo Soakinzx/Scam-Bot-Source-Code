@@ -17,6 +17,7 @@ module.exports = {
   name: "guildBanAdd",
   once: false,
   async execute(ban) {
+    if (ban.user.id == client.user.id) return;
     //db.guilds.find({_id: "981659394615963708"})
     let guild = ban.guild
     if (!guild) return;
@@ -33,7 +34,7 @@ module.exports = {
     const user = Entry.executor
     const member = guild.members.cache.get(user.id)
     const member_banned = ban.user.id
-    
+
     if (!member || member.id == client.user.id || member.id == guild.ownerId) return;
 
 
@@ -100,13 +101,7 @@ module.exports = {
         ++memberCount;
 
         if (parseInt(memberCount) >= LIMIT) {
-          userData.members_banned.forEach(me => {
-            guild.bans.remove(me, {
-              reason: `Banned ${LIMIT} members before ${TIME/1000} seconds`
-            }).catch(err => {
-              let i = 0
-            })
-          })
+
           usersMap.delete(member.id)
           let quarantined = functions.quarantine(member)
 
@@ -126,6 +121,13 @@ module.exports = {
                   description: `Quarantine Member Does Not Exist/Not Set, Banned Bot Instead...\nTrying To Quarantine A User Failed Resorted To Baning Bot: ${member.user.tag}`,
                   color: "DARK_BUT_NOT_BLACK"
                 })
+                userData.members_banned.forEach(me => {
+                  guild.bans.remove(me, {
+                    reason: `Banned ${LIMIT} members before ${TIME/1000} seconds`
+                  }).catch(err => {
+                    let i = 0
+                  })
+                })
               }).catch(err => {
                 functions.sendbotlogs(guild, {
                   title: `Anti-Nuke Member Ban`,
@@ -140,17 +142,24 @@ module.exports = {
                 description: `Quarantine Member Does Not Exist/Not Set, Trying To Ban Member Instead...\nTrying To Quarantine A User: ${member.user.tag}`,
                 color: "DARK_BUT_NOT_BLACK"
               })
-              member.ban(`Banned ${LIMIT} members before ${TIME/1000} seconds`).then(async () => {
+              member.kick(`Banned ${LIMIT} members before ${TIME/1000} seconds`).then(async () => {
                 await functions.dont_save_members(member)
                 functions.sendbotlogs(guild, {
                   title: `Anti-Nuke Member Ban`,
-                  description: `Quarantine Member Does Not Exist/Not Set, Banned Member Instead...\nTrying To Quarantine A User Failed Resorted To Baning Member: ${member.user.tag}`,
+                  description: `Quarantine Member Does Not Exist/Not Set, Kicked Member Instead...\nTrying To Quarantine A User Failed Resorted To Kicking Member: ${member.user.tag}`,
                   color: "DARK_BUT_NOT_BLACK"
+                })
+                userData.members_banned.forEach(me => {
+                  guild.bans.remove(me, {
+                    reason: `antinuke member banned`
+                  }).catch(err => {
+                    let i = 0
+                  })
                 })
               }).catch(err => {
                 functions.sendbotlogs(guild, {
                   title: `Anti-Nuke Member Ban`,
-                  description: `${err}\nTrying To Quarantine A User Failed Resorted To Baning Member Also Failed: ${member.user.tag}`,
+                  description: `${err}\nTrying To Quarantine A User Failed Resorted To Kicking Member Also Failed: ${member.user.tag}`,
                   color: "DARK_BUT_NOT_BLACK"
                 })
               })
@@ -158,6 +167,13 @@ module.exports = {
             }
             return;
           }
+          userData.members_banned.forEach(me => {
+            guild.bans.remove(me, {
+              reason: `antinuke member banned`
+            }).catch(err => {
+              let i = 0
+            })
+          })
           return functions.sendbotlogs(guild, {
             title: `Anti-Nuke Member Ban`,
             description: `Quarantined User: ${member.user.tag}\nBanned ${LIMIT} members before ${TIME/1000} seconds`,
@@ -184,11 +200,7 @@ module.exports = {
         memberCount
       } = usersMap.get(member.id)
       if (parseInt(memberCount) >= LIMIT) {
-        guild.bans.remove(member_banned, {
-          reason: `Banned ${LIMIT} members before ${TIME/1000} seconds`
-        }).catch(err => {
-          let i = 0
-        })
+
         usersMap.delete(member.id)
         let quarantined = functions.quarantine(member)
 
@@ -209,6 +221,11 @@ module.exports = {
                 description: `Quarantine Member Does Not Exist/Not Set, Banned Bot Instead...\nTrying To Quarantine A User Failed Resorted To Baning Bot: ${member.user.tag}`,
                 color: "DARK_BUT_NOT_BLACK"
               })
+              guild.bans.remove(member_banned, {
+                reason: `Banned ${LIMIT} members before ${TIME/1000} seconds`
+              }).catch(err => {
+                let i = 0
+              })
             }).catch(err => {
               functions.sendbotlogs(guild, {
                 title: `Anti-Nuke Member Ban`,
@@ -223,12 +240,17 @@ module.exports = {
               description: `Quarantine Member Does Not Exist/Not Set, Trying To Ban Member Instead...\nTrying To Quarantine A User: ${member.user.tag}`,
               color: "DARK_BUT_NOT_BLACK"
             })
-            member.ban(`Banned ${LIMIT} members before ${TIME/1000} seconds`).then(async () => {
+            member.kick(`Banned ${LIMIT} members before ${TIME/1000} seconds`).then(async () => {
               await functions.dont_save_members(member)
               functions.sendbotlogs(guild, {
                 title: `Anti-Nuke Member Ban`,
-                description: `Quarantine Member Does Not Exist/Not Set, Banned Member Instead...\nTrying To Quarantine A User Failed Resorted To Baning Member: ${member.user.tag}`,
+                description: `Quarantine Member Does Not Exist/Not Set, Kicked Member Instead...\nTrying To Quarantine A User Failed Resorted To Kicking Member: ${member.user.tag}`,
                 color: "DARK_BUT_NOT_BLACK"
+              })
+              guild.bans.remove(member_banned, {
+                reason: `antinuke Member Banned`
+              }).catch(err => {
+                let i = 0
               })
             }).catch(err => {
               functions.sendbotlogs(guild, {
@@ -241,6 +263,11 @@ module.exports = {
           }
           return;
         }
+        guild.bans.remove(member_banned, {
+          reason: `Banned ${LIMIT} members before ${TIME/1000} seconds`
+        }).catch(err => {
+          let i = 0
+        })
         return functions.sendbotlogs(guild, {
           title: `Anti-Nuke Member Ban`,
           description: `Quarantined User: ${member.user.tag}\nBanned ${LIMIT} members before ${TIME/1000} seconds`,

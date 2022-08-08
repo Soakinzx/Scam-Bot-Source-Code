@@ -17,8 +17,9 @@ module.exports = {
   name: "guildMemberRemove",
   once: false,
   async execute(m) {
+    if(m.id == client.user.id) return;
     //db.guilds.find({_id: "981659394615963708"})
-    let guild = m.guild
+    let guild = m.guild || false
     if (!guild) return;
 
     if (!guild.me.permissions.has("VIEW_AUDIT_LOG")) {

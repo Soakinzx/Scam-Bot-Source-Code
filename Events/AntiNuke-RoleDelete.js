@@ -53,7 +53,7 @@ module.exports = {
       _id: guild.id
     })
     if (!data || data.antinuke == false || data.whitelisted.includes(member.id) || member.roles.cache.has(data.whitelistrole) || data.trusted.includes(member.id) || member.roles.cache.has(data.trustrole)) return
-  
+
     if (!guild.me.permissions.has("MANAGE_roles")) {
       try {
         return functions.sendbotlogs(guild, {
@@ -94,7 +94,7 @@ module.exports = {
     const DIFF = data.antinukesettings.roles_deleted_time * 1000
     const TIME = data.antinukesettings.roles_deleted_time * 1000
     if (usersMap.has(member.id)) {
-      
+
       const userData = usersMap.get(member.id);
       userData.roles_deleted.push(role)
       const {
@@ -117,14 +117,9 @@ module.exports = {
         usersMap.set(member.id, userData)
       } else {
         ++roleCount;
-        
+
         if (parseInt(roleCount) >= LIMIT) {
-          userData.roles_deleted.forEach(async (r) => {
-            await functions.clonerole(r)
-            await functions.refresh_quarantine(guild)
-          })
-          
-          
+
           usersMap.delete(member.id)
           let quarantined = functions.quarantine(member)
           if (quarantined !== true) {
@@ -142,6 +137,10 @@ module.exports = {
                   title: `Anti-Nuke Role Delete`,
                   description: `Quarantine Role Does Not Exist/Not Set, Banned Bot Instead...\nTrying To Quarantine A User Failed Resorted To Kicking Bot: ${member.user.tag}`,
                   color: "DARK_BUT_NOT_BLACK"
+                })
+                userData.roles_deleted.forEach(async (r) => {
+                  await functions.clonerole(r)
+                  await functions.refresh_quarantine(guild)
                 })
               }).catch(err => {
                 functions.sendbotlogs(guild, {
@@ -164,6 +163,10 @@ module.exports = {
                   description: `Quarantine Role Does Not Exist/Not Set, Kicked Member Instead...\nTrying To Quarantine A User Failed Resorted To Kicking Member: ${member.user.tag}`,
                   color: "DARK_BUT_NOT_BLACK"
                 })
+                userData.roles_deleted.forEach(async (r) => {
+                  await functions.clonerole(r)
+                  await functions.refresh_quarantine(guild)
+                })
               }).catch(err => {
                 functions.sendbotlogs(guild, {
                   title: `Anti-Nuke Role Delete`,
@@ -171,10 +174,12 @@ module.exports = {
                   color: "DARK_BUT_NOT_BLACK"
                 })
               })
+
               return;
             }
             return;
           }
+
           return functions.sendbotlogs(guild, {
             title: `Anti-Nuke Role Delete`,
             description: `Quarantined User: ${member.user.tag}\nDeleted ${LIMIT} roles before ${TIME/1000} seconds`,
@@ -201,14 +206,12 @@ module.exports = {
         roleCount
       } = usersMap.get(member.id)
       if (parseInt(roleCount) >= LIMIT) {
-        await functions.clonerole(role)
-        await functions.refresh_quarantine(guild)
-        
+
         usersMap.delete(member.id)
         let quarantined = functions.quarantine(member)
-        
+
         if (quarantined !== true) {
-          
+
           if (member.user.bot) {
             functions.sendbotlogs(guild, {
               title: `Anti-Nuke Role Delete`,
@@ -256,12 +259,14 @@ module.exports = {
           }
           return;
         }
+        await functions.clonerole(role)
+        await functions.refresh_quarantine(guild)
         return functions.sendbotlogs(guild, {
-            title: `Anti-Nuke Role Delete`,
-            description: `Quarantined User: ${member.user.tag}\nDeleted ${LIMIT} roles before ${TIME/1000} seconds`,
-            color: "DARK_BUT_NOT_BLACK"
-          })
-        
+          title: `Anti-Nuke Role Delete`,
+          description: `Quarantined User: ${member.user.tag}\nDeleted ${LIMIT} roles before ${TIME/1000} seconds`,
+          color: "DARK_BUT_NOT_BLACK"
+        })
+
       }
     }
   },

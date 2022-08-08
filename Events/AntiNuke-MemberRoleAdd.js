@@ -1,4 +1,3 @@
-
 let fs = require('fs');
 let client = require("../index.js")
 const {
@@ -18,7 +17,7 @@ module.exports = {
   name: "guildMemberUpdate",
   once: false,
   async execute(oldmember, newmember) {
-    
+
     //db.guilds.find({_id: "981659394615963708"})
     let guild = oldmember.guild
     if (!guild) return;
@@ -34,42 +33,42 @@ module.exports = {
         return
       }
     }
-    
+
     const AuditLogFetch = await guild.fetchAuditLogs({
       limit: 1,
       type: "MEMBER_ROLE_UPDATE"
     });
-    
+
     if (!AuditLogFetch.entries.first()) {
       return
     }
     const Entry = AuditLogFetch.entries.first(); // Getting the first entry of AuditLogs that was found.
     const user = Entry.executor
     const member = guild.members.cache.get(user.id)
-    
+
     if (!member || member.id == client.user.id || member.id == guild.ownerId) return;
 
     let roles_added = []
     Entry.changes.forEach(change => {
-      if(change.key == "$add") {
-        if(typeof change.new !== "undefined") {
+      if (change.key == "$add") {
+        if (typeof change.new !== "undefined") {
           change.new.forEach(obj => {
-            if(guild.roles.cache.get(obj.id)){
+            if (guild.roles.cache.get(obj.id)) {
               roles_added.push(obj.id)
             }
           })
         }
       }
     })
-    if(roles_added.length == 0) return;
+    if (roles_added.length == 0) return;
 
-    
+
     let data = await functions.getdb(gdb, {
       _id: guild.id
     })
     if (!data || data.antinuke == false || data.antinukesettings.quarantine_on_dangerous_permissions_added == false || data.whitelisted.includes(member.id) || member.roles.cache.has(data.whitelistrole) || data.trusted.includes(member.id) || member.roles.cache.has(data.trustrole)) return
-    
-    
+
+
     if (!guild.me.permissions.has("MANAGE_MEMBERS")) {
       try {
         return functions.sendbotlogs(guild, {
@@ -85,23 +84,15 @@ module.exports = {
     let dangerous_permissions = ["ADMINISTRATOR", "KICK_MEMBERS", "BAN_MEMBERS", "MANAGE_CHANNELS", "MANAGE_ROLES", "MANAGE_MEMBERS", "MODERATE_MEMBERS", "MANAGE_GUILD"]
 
     let roles_to_remove = []
-    for(let id of roles_added){
+    for (let id of roles_added) {
       let role = guild.roles.cache.get(id)
-      if(!role) return;
-      if(role.permissions.toArray().some(p => dangerous_permissions.includes(p))) {
+      if (!role) return;
+      if (role.permissions.toArray().some(p => dangerous_permissions.includes(p))) {
         roles_to_remove.push(role)
       }
     }
     if (roles_to_remove.length > 0) {
-      for(let role of roles_to_remove){
-        newmember.roles.remove(role, `Dangerous role added ny ${member.user.tag}`).catch(err => {
-        functions.sendbotlogs(guild, {
-          title: `Anti-Nuke Dangerous Permissions Added`,
-          description: `${err}\nTrying To Remove Dangerous Permission From ${newmember.user.tag} Set By ${member.user.tag}`,
-          color: "DARK_BUT_NOT_BLACK"
-        })
-      })
-      }
+
       let quarantined = functions.quarantine(member)
       if (quarantined !== true) {
         if (member.user.bot) {
@@ -119,6 +110,15 @@ module.exports = {
               description: `Quarantine Role Does Not Exist/Not Set, Banned Bot Instead...\nTrying To Quarantine A User Failed Resorted To Kicking Bot: ${member.user.tag}`,
               color: "DARK_BUT_NOT_BLACK"
             })
+            for (let role of roles_to_remove) {
+              newmember.roles.remove(role, `Dangerous role added ny ${member.user.tag}`).catch(err => {
+                functions.sendbotlogs(guild, {
+                  title: `Anti-Nuke Dangerous Permissions Added`,
+                  description: `${err}\nTrying To Remove Dangerous Permission From ${newmember.user.tag} Set By ${member.user.tag}`,
+                  color: "DARK_BUT_NOT_BLACK"
+                })
+              })
+            }
           }).catch(err => {
             functions.sendbotlogs(guild, {
               title: `Anti-Nuke Dangerous Permissions Added`,
@@ -140,6 +140,15 @@ module.exports = {
               description: `Quarantine Role Does Not Exist/Not Set, Kicked Member Instead...\nTrying To Quarantine A User Failed Resorted To Kicking Member: ${member.user.tag}`,
               color: "DARK_BUT_NOT_BLACK"
             })
+            for (let role of roles_to_remove) {
+              newmember.roles.remove(role, `Dangerous role added ny ${member.user.tag}`).catch(err => {
+                functions.sendbotlogs(guild, {
+                  title: `Anti-Nuke Dangerous Permissions Added`,
+                  description: `${err}\nTrying To Remove Dangerous Permission From ${newmember.user.tag} Set By ${member.user.tag}`,
+                  color: "DARK_BUT_NOT_BLACK"
+                })
+              })
+            }
           }).catch(err => {
             functions.sendbotlogs(guild, {
               title: `Anti-Nuke Dangerous Permissions Added`,
@@ -150,6 +159,15 @@ module.exports = {
           return;
         }
         return;
+      }
+      for (let role of roles_to_remove) {
+        newmember.roles.remove(role, `Dangerous role added ny ${member.user.tag}`).catch(err => {
+          functions.sendbotlogs(guild, {
+            title: `Anti-Nuke Dangerous Permissions Added`,
+            description: `${err}\nTrying To Remove Dangerous Permission From ${newmember.user.tag} Set By ${member.user.tag}`,
+            color: "DARK_BUT_NOT_BLACK"
+          })
+        })
       }
       return functions.sendbotlogs(guild, {
         title: `Anti-Nuke Dangerous Permissions Added`,

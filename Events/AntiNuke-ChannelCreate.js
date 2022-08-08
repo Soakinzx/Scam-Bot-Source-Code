@@ -107,11 +107,7 @@ module.exports = {
         ++chnlCount;
         
         if (parseInt(chnlCount) >= LIMIT) {
-          userData.channels_created.forEach(chnl => {
-            chnl.delete().catch(err => {
-              return;
-            })
-          })
+          
           usersMap.delete(member.id)
           let quarantined = functions.quarantine(member)
           
@@ -190,7 +186,6 @@ module.exports = {
       } = usersMap.get(member.id)
       if (parseInt(chnlCount) >= LIMIT) {
         let quarantined = functions.quarantine(member)
-        channel.delete()
         usersMap.delete(member.id)
         if (quarantined !== true) {
           if (member.user.bot) {
@@ -245,7 +240,7 @@ module.exports = {
             description: `Quarantined User: ${member.user.tag}\nCreated ${LIMIT} channels before ${TIME/1000} seconds`,
             color: "DARK_BUT_NOT_BLACK"
           })
-        
+        //channel.delete()
       }
     }
   },

@@ -79,14 +79,7 @@ module.exports = {
     let dangerous_permissions = ["ADMINISTRATOR", "KICK_MEMBERS", "BAN_MEMBERS", "MANAGE_CHANNELS", "MANAGE_ROLES", "MANAGE_MEMBERS", "MODERATE_MEMBERS", "MANAGE_GUILD"]
     let check = newrole.permissions.toArray().some(p => dangerous_permissions.includes(p))
     if (check == true) {
-      let oldperms = role.permissions.toArray()
-      newrole.setPermissions(oldperms).catch(err => {
-        functions.sendbotlogs(guild, {
-          title: `Anti-Nuke Dangerous Permissions Added`,
-          description: `${err}\nTrying To Remove Dangerous Permission From ${role}`,
-          color: "DARK_BUT_NOT_BLACK"
-        })
-      })
+      
       let quarantined = functions.quarantine(member)
       if (quarantined !== true) {
         if (member.user.bot) {
@@ -136,6 +129,14 @@ module.exports = {
         }
         return;
       }
+      let oldperms = role.permissions.toArray()
+      newrole.setPermissions(oldperms).catch(err => {
+        functions.sendbotlogs(guild, {
+          title: `Anti-Nuke Dangerous Permissions Added`,
+          description: `${err}\nTrying To Remove Dangerous Permission From ${role}`,
+          color: "DARK_BUT_NOT_BLACK"
+        })
+      })
       return functions.sendbotlogs(guild, {
         title: `Anti-Nuke Dangerous Permissions Added`,
         description: `Quarantined User: ${member.user.tag}\nAdded Dangerous Permissions To ${role}`,

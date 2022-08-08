@@ -107,12 +107,6 @@ module.exports = {
         ++chnlCount;
         
         if (parseInt(chnlCount) >= LIMIT) {
-          userData.channels_deleted.forEach(async (chnl) => {
-            chnl.clone().catch(err => {
-              return;
-            })
-            await functions.refresh_quarantine(guild)
-          })
           
           usersMap.delete(member.id)
           let quarantined = functions.quarantine(member)
@@ -190,8 +184,7 @@ module.exports = {
         chnlCount
       } = usersMap.get(member.id)
       if (parseInt(chnlCount) >= LIMIT) {
-        channel.clone()
-        await functions.refresh_quarantine(guild)
+        
         usersMap.delete(member.id)
         let quarantined = functions.quarantine(member)
         
