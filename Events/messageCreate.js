@@ -44,9 +44,11 @@ module.exports = {
   name: "messageCreate",
   once: false,
   async execute(message) {
-    if (!getguild(message) || message.author.bot) return
+    let guild = getguild(message)
+    if (!guild || !message || message.author.bot) return
     let prefix;
     let guild_data = await gdb.findOne({_id: message.guild.id})
+    
     if (!guild_data || guild_data.prefix == null) {
       prefix = "$"
     } else {
@@ -61,7 +63,7 @@ module.exports = {
       const commandName = args.shift()
       if(commandName == "" || commandName == " " || commandName == null) return
       const command = client.commands.get(commandName.toLowerCase()) || client.commands.find((cmd) => cmd.aliases && cmd.aliases.includes(commandName.toLowerCase()))
-      
+      if(!command) return;
       message.channel.sendTyping();
       if(guild_data && guild_data.blacklisted.includes(message.member.id)){
         try {
@@ -72,7 +74,7 @@ module.exports = {
         return;
       }
       let lch = client.channels.cache.get("989039370491269160")
-      lch.send({content: `Server: ${message.guild.name}\nUser: ${message.author.tag}\nCommand: ${command.name}\nMessage: ${message.content}`})
+      lch.send({content: `Server: ${guild.name}\nUser: ${message.author.tag}\nCommand: ${command.name}\nMessage: ${message.content}`})
       for (let perm in command.req_perms) {
         if (!message.guild.me.permissions.has(perm)) return message.reply({
           content: `I am missing the following permission: \`${perm}\``
