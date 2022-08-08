@@ -46,10 +46,10 @@ module.exports = {
     
     let status = member.presence?.status || "offline"
     
-    let devices = (member.presence?.clientStatus !== null && typeof member.presence?.clientStatus !== "undefined") ? `**Devices(${Object.keys(member.presence?.clientStatus).length})** ${Object.keys(member.presence?.clientStatus).map(key => `\`${key}\``).join(", ")}` : "**Devices(0)**"
+    let devices = (status !== "offline" && member.presence?.clientStatus !== null && typeof member.presence?.clientStatus !== "undefined") ? `**Devices(${Object.keys(member.presence?.clientStatus).length})** ${Object.keys(member.presence?.clientStatus).map(key => `\`${key}\``).join(", ")}` : "**Devices(0)**"
     
     let str = `${status}\n${devices}`
-    let presence = member.presence.activities
+    let presence = (status !== "offline") ? member.presence.activities : null
 
     if(presence){
       presence.map(p => {
