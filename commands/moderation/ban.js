@@ -23,7 +23,7 @@ module.exports = {
           reason: `banned by ${message.member}`
         }).then((user) => {
           return message.reply({
-            content: `Banned ${user.tag} `
+            content: `Banned ${member.user.tag} `
           })
         }).catch(err => {
           return message.reply({
@@ -48,7 +48,7 @@ module.exports = {
         reason: `banned by ${message.member}`
       }).then((user) => {
         return message.reply({
-          content: `Banned ${user.tag} `
+          content: `Banned ${member.user.tag} `
         })
       }).catch(err => {
         return message.reply({
