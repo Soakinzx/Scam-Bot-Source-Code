@@ -61,9 +61,7 @@ module.exports = {
       const commandName = args.shift()
       if(commandName == "" || commandName == " " || commandName == null) return
       const command = client.commands.get(commandName.toLowerCase()) || client.commands.find((cmd) => cmd.aliases && cmd.aliases.includes(commandName.toLowerCase()))
-      if (!command) return message.channel.send({
-        content: `\`${commandName}\` is not a command`
-      })
+      
       message.channel.sendTyping();
       if(guild_data && guild_data.blacklisted.includes(message.member.id)){
         try {
