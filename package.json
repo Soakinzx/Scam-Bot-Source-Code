@@ -28,6 +28,7 @@
     "mongoose": "^6.4.4",
     "request": "^2.88.2",
     "something-random-on-discord": "^3.4.4",
-    "sourcebin": "^4.3.5"
+    "sourcebin": "^4.3.5",
+    "superagent": "^8.0.0"
   }
 }
