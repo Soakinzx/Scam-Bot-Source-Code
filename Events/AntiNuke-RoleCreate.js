@@ -22,15 +22,11 @@ module.exports = {
     if (!guild) return;
 
     if (!guild.me.permissions.has("VIEW_AUDIT_LOG")) {
-      try {
-        return functions.sendbotlogs(guild, {
+      return functions.sendbotlogs(guild, {
           title: `Anti-Nuke Role Create`,
           description: `Im Missing Permissions: \`VIEW_AUDIT_LOG\``,
           color: "DARK_BUT_NOT_BLACK"
-        })
-      } catch (err) {
-        return
-      }
+      })
     }
 
 
