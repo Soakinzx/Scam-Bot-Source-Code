@@ -17,10 +17,18 @@ module.exports = {
   name: "guildBanAdd",
   once: false,
   async execute(ban) {
-    if (ban.user.id == client.user.id) return;
-    //db.guilds.find({_id: "981659394615963708"})
     let guild = ban.guild
     if (!guild) return;
+    if (ban.user.id == client.user.id) return;
+      
+    if (!guild.me.permissions.has("VIEW_AUDIT_LOG")) {
+      return functions.sendbotlogs(guild, {
+          title: `Anti-Nuke Member Ban`,
+          description: `Im Missing Permissions: \`VIEW_AUDIT_LOG\``,
+          color: "DARK_BUT_NOT_BLACK"
+      })
+    }
+    
 
 
     const AuditLogFetch = await guild.fetchAuditLogs({
