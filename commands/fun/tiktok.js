@@ -40,7 +40,7 @@ module.exports = {
         })
       
       let vid = resVideo.data.body.info.itemInfo.itemStruct
-      console.log(vid);
+      
       let embed = {
         title: "TikTok Video Info",
         description: vid.desc,
@@ -50,8 +50,7 @@ module.exports = {
         ],
         footer: {
           text: `👍 ${vid.stats.diggCount} 💬 ${vid.stats.commentCount} 👁️ ${vid.stats.playCount} | ${vid.id}`
-        },
-        timestamp: true
+        }
       }
         message.channel.send({
             embeds: [embed]
