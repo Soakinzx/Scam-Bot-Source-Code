@@ -27,7 +27,7 @@ module.exports = {
     permission: [],
     usage: ["$tiktok <video url>"],
     req_perms: ["SEND_MESSAGES"],
-    description: "get a video of a tiktok",
+    description: "get the video of from a tiktok video url",
     run: async (client, message, args) => {
 
         if (!args.join(" ")) return message.reply({
