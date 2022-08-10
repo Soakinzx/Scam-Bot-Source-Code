@@ -20,7 +20,7 @@ module.exports = {
   category: "fun",
   permission: [],
   usage: ["$texttospeech <text>"],
-  req_perms: ["SEND_MESSAGES"],
+  req_perms: ["SEND_MESSAGES", "CONNECT", "SPEAK"],
   description: "convert text to speech",
   run: async (client, message, args) => {
 
@@ -38,7 +38,7 @@ module.exports = {
             host: 'https://translate.google.com',
             timeout: 5000,
         });
-
+        message.react("<:check:1007053001720090694>")
         let player = createAudioPlayer();
         let resource = createAudioResource(audioUrl);
 
