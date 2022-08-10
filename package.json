@@ -30,6 +30,8 @@
     "something-random-on-discord": "^3.4.4",
     "sourcebin": "^4.3.5",
     "superagent": "^8.0.0",
-    "social-downloader-cherry": "^1.0.0"
+    "social-downloader-cherry": "^1.0.0",
+    "ffmpeg-static": "^5.0.2",
+    "google-tts-api": "^2.0.2"
   }
 }
