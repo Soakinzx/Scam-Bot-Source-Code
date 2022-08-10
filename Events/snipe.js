@@ -28,7 +28,7 @@ module.exports = {
         data.save()
       } else if(data) {
         
-        let context = (msg.type == "REPLY") ? `${msg.content.slice(0,4000)} - replied to ${msg.mentions.users.first().tag}` : msg.content.slice(0,4000)
+        let context = (msg.type == "REPLY") ? `${msg.content.slice(0,4000)} - replied to ${(message.mentions.repliedUser) ? message.mentions.repliedUser.tag : "Unknown"}` : msg.content.slice(0,4000)
         let obj = {
           id: msg.author.id,
           content: context
