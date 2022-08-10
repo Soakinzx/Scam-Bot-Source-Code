@@ -29,13 +29,13 @@ module.exports = {
     })
 
     let profile = res.data.body.profile
-
+    let length = (res.data.body.stories) ? res.data.body.stories.length : 0
     let embed = {
       title: `${profile.username}'s instagram`,
       description: `Avatar - [link](${profile.profile_pic_url})`,
       fields: [{
         name: `Profile`,
-        value: `**Full Name:** \`${profile.full_name}\`\n**Is Private?:** \`${(profile.is_private) ? "Yes" : "No"}\`\n**Followers:** \`${profile.edge_followed_by.count}\`\n**Following:** \`${profile.edge_follow.count}\`\n**Stories:** \`${res.data.body.stories.length}\``,
+        value: `**Full Name:** \`${profile.full_name}\`\n**Is Private?:** \`${(profile.is_private) ? "Yes" : "No"}\`\n**Followers:** \`${profile.edge_followed_by.count}\`\n**Following:** \`${profile.edge_follow.count}\`\n**Stories:** \`${length}\``,
         inline: true
       }],
       image: {
