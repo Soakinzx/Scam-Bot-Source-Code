@@ -17,11 +17,16 @@ const client = new Discord.Client({
 
 const fs = require("fs");
 
+const { Api } = require("@top-gg/sdk")
+client.topgg = new Api(config.topgg_token, this)
+
 client.commands = new Discord.Collection();
 client.owners = ["849288765482598480","765201883157495860", "957819187936518217"]
 client.ingame = []
+client.vote_required = ["holiday", "tiktok", "instagramprofile", "instagrampost", "texttospeech", "tutorial"]
 client.tum = []
 client.invite_link = "https://discord.com/oauth2/authorize?client_id=877168141355065404&permissions=1240658865402&scope=bot"
+client.vote_link = "https://top.gg/bot/877168141355065404"
 client.server_link = "https://discord.gg/sekor"
 client.editing_welcome = []
 client.guild_schema = {
