@@ -328,7 +328,7 @@ client.on("interactionCreate", async (i) => {
       } else {
         lmsg = functions.cloneobj(data.leave_message)
       }
-      let embed = functions.cloneobj(wmsg.embed)
+      let embed = functions.cloneobj(lmsg.embed)
 
       if (title.toLowerCase() === "remove") {
         title = null
@@ -423,7 +423,7 @@ client.on("interactionCreate", async (i) => {
         embed.color = color
       }
       lmsg.embed = embed
-      data.leave_message = wmsg
+      data.leave_message = lmsg
       data.save()
       return i.reply({
         content: "Leave Message Embed Set",
