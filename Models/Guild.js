@@ -20,6 +20,7 @@ const Guild = Schema({
   last_joined: String,
   disabled_commands: Array,
   logs_channel: String,
+  log_events: Object,
   bot_logs_channel: String,
   auto_role: Boolean, 
   auto_roles: Array,
