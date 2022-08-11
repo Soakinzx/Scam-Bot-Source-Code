@@ -11,6 +11,7 @@ module.exports = {
   usage: ["$setlogs <text channel>"],
   description: "set logs channel",
   run:async (client, message, args) => {
+    return message.reply({content: `Being worked on...`})
     let gs = functions.cloneobj(client.guild_schema)
     gs._id = message.guild.id
     if(!args.length) return message.reply({content: "Must specify an argument: `#TextChannel`"})
