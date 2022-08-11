@@ -142,6 +142,7 @@ function sendlogs(guild, embed) {
     if (err) return
     if (!data) return
     let channel = guild.channels.cache.get(data.logs_channel)
+    if(!channel) return;
     channel.send({
       embeds: [embed]
     }).catch(err => {
