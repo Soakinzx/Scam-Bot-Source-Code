@@ -5,13 +5,13 @@ const gdb = require("../../Models/Guild")
 //ends with 1: st, if is greater than 100 and ends with 1 :th
 
 module.exports = {
-  name: "welcomevariables",
+  name: "variables",
   aliases: [],
   category: "configuration",
   permission: ["ADMINISTRATOR"],
   req_perms: ["SEND_MESSAGES"],
-  usage: ["$welcomevariables"],
-  description: "see all welcome variables",
+  usage: ["$variables"],
+  description: "see all variables",
   run:async (client, message, args) => {
     //return message.reply({content: "Being worked on..."})
     let variables = [
@@ -54,7 +54,7 @@ module.exports = {
     ]
 
     let embed = {
-      title: "Welcome Variables",
+      title: "Variables",
       description: variables.map(v => `\`${v}\``).join("\n")
     }
     return message.channel.send({embeds: [embed]})
