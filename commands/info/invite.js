@@ -27,6 +27,10 @@ module.exports = {
       .setStyle("LINK")
       .setURL(client.server_link)
       .setLabel("Server Invite")
+      new Discord.MessageButton()
+      .setStyle("LINK")
+      .setURL(client.vote_link)
+      .setLabel("Vote!")
     )
     return message.channel.send({embeds: [embed], components: [row]})
 },
