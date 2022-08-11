@@ -42,7 +42,7 @@ module.exports = {
     let embed = new MessageEmbed()
       .setTitle(`${client.user.username} info`)
       .setColor("DARK_BUT_NOT_BLACK")
-      .setDescription(`**Watching** \`${client.guilds.cache.size}\` Servers\n**Watching** \`${client.users.cache.size}\` Users\n**Uptime** ${convert(client.uptime)}\n**Server** - [link](${client.server_link})\n**Invite** - [link](${client.invite_link})\n**Libary** discord.js\n`)
+      .setDescription(`**Watching** \`${client.guilds.cache.size}\` Servers\n**Watching** \`${client.users.cache.size}\` Users\n**Uptime** ${convert(client.uptime)}\n**Server** - [link](${client.server_link})\n**Invite** - [link](${client.invite_link})\n**Vote** - [link](${client.vote_link})\n**Libary** discord.js\n`)
       .addField(`Owners`, functions.text_block(`${client.owners.slice(1, client.owners.length).map(id => {
         if(id == dev){
           return `${client.users.cache.get(id).tag}(devoloper)`
