@@ -23,7 +23,7 @@ client.topgg = new Api(config.topgg_token, this)
 client.commands = new Discord.Collection();
 client.owners = ["849288765482598480","765201883157495860", "957819187936518217"]
 client.ingame = []
-client.vote_required = ["holiday", "tiktok", "instagramprofile", "instagrampost", "texttospeech", "tutorial"]
+client.vote_required = ["holiday", "tiktok", "instagramprofile", "instagrampost", "texttospeech", "tutorial", "setstatusrole", "setpokehelper", "anti"]
 client.tum = []
 client.invite_link = "https://discord.com/oauth2/authorize?client_id=877168141355065404&permissions=1240658865402&scope=bot"
 client.vote_link = "https://top.gg/bot/877168141355065404"
