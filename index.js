@@ -28,7 +28,8 @@ client.tum = []
 client.invite_link = "https://discord.com/oauth2/authorize?client_id=877168141355065404&permissions=1240658865402&scope=bot"
 client.vote_link = "https://top.gg/bot/877168141355065404"
 client.server_link = "https://discord.gg/sekor"
-client.editing_welcome = []
+client.editing_welcome = [],
+client.editing_leave = []
 client.guild_schema = {
   _id: null,
   Autorespond_messages: [],
@@ -45,6 +46,32 @@ client.guild_schema = {
   welcome_channel: null,
   welcome_message: {
     content: "Welcome to {server.name} {user.name}",
+    embed: {
+      title: null,
+      description: null,
+      footer: {
+        text: null,
+        iconURL: null
+      },
+      url: null,
+      color: null,
+      thumbnail: {
+        url: null,
+      },
+      image: {
+        url: null
+      },
+      author: {
+        name: null,
+        iconURL: null
+      }
+    },
+    embed_enabled: false,
+    text_enabled: true
+  },
+  leave_channel: null,
+  leave_message: {
+    content: "Goodbye {user.name}!",
     embed: {
       title: null,
       description: null,
@@ -279,7 +306,128 @@ client.on("interactionCreate", async (i) => {
       data.welcome_message = wmsg
       data.save()
       return i.reply({
-        content: "Welcome Message Embed Set"
+        content: "Welcome Message Embed Set",
+        ephemeral: true
+      })
+    }
+    if (i.customId == "leave_modal") {
+      let title = i.fields.getTextInputValue("title")
+      let desc = i.fields.getTextInputValue("description")
+      let footer = i.fields.getTextInputValue("footer")
+      let author = i.fields.getTextInputValue("author")
+      let color = i.fields.getTextInputValue("color")
+      let data = await functions.getdb(gdb, {
+        _id: i.guild.id
+      })
+      let gs = functions.cloneobj(client.guild_schema)
+      gs._id = i.guild.id
+      let lmsg;
+      if (!data) {
+        data = new gdb(gs)
+        lmsg = functions.cloneobj(data.leave_message)
+      } else {
+        lmsg = functions.cloneobj(data.leave_message)
+      }
+      let embed = functions.cloneobj(wmsg.embed)
+
+      if (title.toLowerCase() === "remove") {
+        title = null
+      }
+      if (desc.toLowerCase() === "remove") {
+        desc = null
+      }
+      if (footer.toLowerCase() === "remove") {
+        footer = null
+      }
+      if (author.toLowerCase() === "remove") {
+        author = null
+      }
+      if (color.toLowerCase() === "remove") {
+        title = null
+      }
+      if (title !== "ignore") {
+        embed.title = title
+      }
+      if (desc !== "ignore") {
+        embed.description = desc
+      }
+      if (footer !== "ignore") {
+        let f = footer.split("++")[0].split(" ")
+        for (let i = 0; i < f.length; i++) {
+          if (f[i] == "" || f[i] == " ") {
+            f.splice(i, 1)
+          }
+        }
+        let s = footer.split("++")[1]
+        if (s) {
+          s = s.split(" ")
+          for (let i = 0; i < s.length; i++) {
+            if (s[i] == "" || s[i] == " ") {
+              s.splice(i, 1)
+            }
+          }
+          let text = f.join(" ")
+          let icon = s.join(" ")
+          let footer = {
+            text: null,
+            iconURL: null
+          }
+          footer.text = text
+          footer.iconURL = icon
+          embed.footer = footer
+        } else {
+          let footer = {
+            text: null,
+            iconURL: null
+          }
+          let text = f.join(" ")
+          footer.text = text
+          embed.footer = footer
+        }
+
+      }
+      if (author !== "ignore") {
+        let f = author.split("++")[0].split(" ")
+        for (let i = 0; i < f.length; i++) {
+          if (f[i] == "" || f[i] == " ") {
+            f.splice(i, 1)
+          }
+        }
+        let s = author.split("++")[1]
+        if (s) {
+          s = s.split(" ")
+          for (let i = 0; i < s.length; i++) {
+            if (s[i] == "" || s[i] == " ") {
+              s.splice(i, 1)
+            }
+          }
+          let author = {
+            name: null,
+            iconURL: null
+          }
+          author.name = f.join(" ")
+          author.iconURL = s.join(" ")
+          embed.author = author
+        } else {
+          let author = {
+            name: null,
+            iconURL: null
+          }
+          author.name = f.join(" ")
+          author.iconURL = s.join(" ")
+          embed.author = author
+        }
+
+      }
+      if (color !== "ignore") {
+        embed.color = color
+      }
+      lmsg.embed = embed
+      data.leave_message = wmsg
+      data.save()
+      return i.reply({
+        content: "Leave Message Embed Set",
+        ephemeral: true
       })
     }
   }
