@@ -7,7 +7,7 @@ module.exports = {
   aliases: [],
   category: "configuration",
   permission: ["ADMINISTRATOR"],
-  req_perms: ["SEND_MESSAGES", "MANAGE_ROLES"],
+  req_perms: ["SEND_MESSAGES"],
   usage: ["$setwelcome <text channel>"],
   description: "set welcome channel",
   run:async (client, message, args) => {
