@@ -15,6 +15,8 @@ const Guild = Schema({
   save_roles: Boolean,
   welcome_channel: String,
   welcome_message: Object,
+  leave_channel: String,
+  leave_message: Object,
   last_joined: String,
   disabled_commands: Array,
   logs_channel: String,
