@@ -165,7 +165,7 @@ let variables = [
       } else if(wmsg.text_enabled == true && wmsg.embed_enabled == false){
         message.channel.send({content: `${format(wmsg.content)}`})
       } else if(wmsg.text_enabled == false && wmsg.embed_enabled == true){
-        message.channel.send({embeds: [format(data.wmsg.embed)]})
+        message.channel.send({embeds: [format(wmsg.embed)]})
       }
     } else {
       let channel = message.channel
