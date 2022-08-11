@@ -1,6 +1,5 @@
 
 const Discord = require("discord.js")
-require("discord-banner")();
 
 module.exports = {
   name: "invite",
@@ -26,7 +25,7 @@ module.exports = {
       new Discord.MessageButton()
       .setStyle("LINK")
       .setURL(client.server_link)
-      .setLabel("Server Invite")
+      .setLabel("Server Invite"),
       new Discord.MessageButton()
       .setStyle("LINK")
       .setURL(client.vote_link)
