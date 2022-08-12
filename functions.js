@@ -315,6 +315,16 @@ async function dont_save_roles(member){
   }
 }
 
+async function getAuditLog(guild, log_type){
+    if (!guild.me.permissions.has("VIEW_AUDIT_LOG")) return false
+    const AuditLogFetch = await guild.fetchAuditLogs({
+      limit: 1,
+      type: log_type
+    });
+    if (!AuditLogFetch.entries.first()) return false
+    return AuditLogFetch.entries.first()
+}
+
 module.exports = {
   cloneobj: cloneobj,
   getdb: getdb,
@@ -335,5 +345,6 @@ module.exports = {
   remove_all_roles: remove_all_roles,
   refresh_quarantine: refresh_quarantine,
   clonerole: clonerole,
-  dont_save_roles: dont_save_roles
+  dont_save_roles: dont_save_roles,
+  getAuditLog: getAuditLog
 }
