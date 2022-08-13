@@ -43,6 +43,7 @@ module.exports = {
     } = message
     const members = guild.members.cache.filter(m => m.premiumSinceTimestamp
  !== null).map(m => m)
+    members.sort((a,b) => b.premiumSinceTimestamp-a.premiumSinceTimestamp)
     if(members.length == 0) return message.reply({content: `No Boosters`})
 
     /**
