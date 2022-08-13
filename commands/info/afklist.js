@@ -47,7 +47,6 @@ module.exports = {
       data = new gdb(gs)
       data.save()
     }
-    let guild = message.guild
     if(data.afk_list.length == 0) return message.reply({content: `No Afk Users`})
     const {
       author,
@@ -74,11 +73,9 @@ module.exports = {
       // You can of course customise this embed however you want
       return new MessageEmbed({
         title: "AFK List",
-        description: `${await Promise.all(
-          current.map(d => {
-              return `\`${members.indexOf(d)+1}\` **${d.member.user.tag}** • \`${d.message}\` • <t:${d.date/1000}:R>`
-          }).join("\n")
-          )}`
+        description: `${current.map(d => {
+              return `\`${members.indexOf(d)+1}\` **${d.member.user.tag}** • \`${d.message}\` • <t:${Math.round(d.date/1000)}:R>`
+          }).join("\n")}`
       }).setFooter(`Showing afk users ${start + 1}-${start + current.length} out of ${
       members.length
     }`)
