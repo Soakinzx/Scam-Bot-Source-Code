@@ -37,6 +37,9 @@ module.exports = {
       if(data.trusted.includes(member.id)) {
         data.trusted.splice(data.trusted.indexOf(member.id),1)
       }
+      if(data.boosters_lost.find(d => d.id == member.id)){
+          data.boosters_lost.splice(data.boosters_lost.find(d => d.id == member.id),1)
+      }
       data.save()
     },
 };
