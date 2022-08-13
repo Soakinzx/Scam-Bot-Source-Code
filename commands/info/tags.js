@@ -46,8 +46,9 @@ module.exports = {
       author,
       channel
     } = message
-    const members = guild.members.cache.filter(m => m.user.discriminator == discriminator && m.id !== user.id).map(m => m)
-    if(members.length == 0) return message.reply({content: "No Users Found With Similar Tag"})
+    let i=1
+    const members = guild.members.cache.filter(m => m.user.discriminator == discriminator && m.id !== user.id).map((m) => `\`${i++}\` **${m.user.tag}**`)
+    if(members.length == 0) return message.reply({content: `No Users Found With Similar Tag As **${user.tag}**`})
     /**
      * Creates an embed with members starting from an index.
      * @param {number} start The index to start from.
@@ -59,10 +60,8 @@ module.exports = {
 
       // You can of course customise this embed however you want
       return new MessageEmbed({
-        title: "members",
-        fields: current.map(async tag => {
-            `\`${members.indexOf(tag)+1}\` **${tag}**`
-        })
+        title: `Tags Found For ${discriminator}`,
+        description: current.join("\n")
       }).setFooter(`Showing members ${start + 1}-${start + current.length} out of ${
       members.length
     }`)
