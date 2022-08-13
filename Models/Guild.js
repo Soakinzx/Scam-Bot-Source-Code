@@ -42,7 +42,8 @@ const Guild = Schema({
   whitelistrole: String,
   trusted: Array,
   trustrole: String,
-  quarantinerole: String
+  quarantinerole: String,
+  boosters_lost: Array
 })
 
 module.exports = model("Guilds", Guild)
