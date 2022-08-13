@@ -55,7 +55,7 @@ module.exports = {
     } = message
     const members = data.boosters_lost.map(d => {
         return {
-            member: message.guild.members.cache.get(d.id) || "Unknown",
+            member: message.guild.members.cache.get(d.id),
             date: d.date
         }
     })
@@ -72,11 +72,9 @@ module.exports = {
       // You can of course customise this embed however you want
       return new MessageEmbed({
           title: "Boosters Lost",
-          description: `${await Promise.all(
-          current.map(d => {
+          description: current.map(d => {
               return `\`${members.indexOf(d)+1}\` **${d.member.user.tag}** • <t:${d.date/1000}:R>`
           }).join("\n")
-          )}`
         })
         .setFooter(`Showing boosters lost ${start + 1}-${start + current.length} out of ${
       members.length
