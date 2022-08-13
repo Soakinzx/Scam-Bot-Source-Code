@@ -57,12 +57,10 @@ module.exports = {
       // You can of course customise this embed however you want
       return new MessageEmbed({
         title: "boosters",
-        fields: await Promise.all(
-          current.map(async member => ({
+        fields: current.map(async member => ({
             name: member.user.tag,
             value: `\`\`\`Username: ${member.user.username}\nID: ${member.id}\nBoosted: ${moment(member.premiumSinceTimestamp).fromNow()}\`\`\``
           }))
-        )
       }).setFooter(`Showing boosters ${start + 1}-${start + current.length} out of ${
       members.length
     }`)
