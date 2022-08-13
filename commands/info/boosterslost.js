@@ -73,7 +73,7 @@ module.exports = {
       return new MessageEmbed({
           title: "Boosters Lost",
           description: current.map(d => {
-              return `\`${members.indexOf(d)+1}\` **${d.member.user.tag}** • <t:${d.date/1000}:R>`
+              return `\`${members.indexOf(d)+1}\` **${d.member.user.tag}** • <t:${Math.round(d.date/1000)}:R>`
           }).join("\n")
         })
         .setFooter(`Showing boosters lost ${start + 1}-${start + current.length} out of ${
