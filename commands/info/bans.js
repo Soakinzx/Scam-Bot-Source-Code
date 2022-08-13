@@ -42,7 +42,7 @@ module.exports = {
       channel
     } = message
     const members = []
-    await guild.bans.fetch().then(async (bans) => {
+    await Promise.all(await guild.bans.fetch().then(async (bans) => {
       let keys = Array.from(bans.keys())
     
       for(let key of keys){
@@ -52,6 +52,8 @@ module.exports = {
         
       }
     })
+    )
+    if(members.length == 0) return message.reply({content: `No Bans`})
     /**
      * Creates an embed with members starting from an index.
      * @param {number} start The index to start from.

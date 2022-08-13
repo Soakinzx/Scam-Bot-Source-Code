@@ -83,7 +83,7 @@ module.exports = {
       function firstpage() {
         const category = categories[Math.floor(Math.random()*categories.length)]
         const category_embed = new MessageEmbed()
-          .setTitle(`${category.directory} Commands`)
+          .setTitle(`${category.directory}(${category.commands.length}) Commands`)
           .setColor("DARK_BUT_NOT_BLACK")
           .setFooter(`${prefix}help <cmdname> for more information on a command`)
           .setDescription(category.commands.map(cmd => `\`${cmd.name}\``).join(", "))
@@ -124,7 +124,9 @@ module.exports = {
         });
         collector.on("end", async () => {
           
-          sendmsg.edit({components: functions.disable_all_components(sendmsg)})
+          sendmsg.edit({components: functions.disable_all_components(sendmsg)}).catch(err => {
+              return;
+          })
         });
       } catch {}
     }

@@ -60,7 +60,7 @@ module.exports = {
       channel
     } = message
     const members = role.members.map(m => m)
-
+    if(members.length == 0) return message.reply({content: `No Members In \`${role.name}\``})
     /**
      * Creates an embed with members starting from an index.
      * @param {number} start The index to start from.

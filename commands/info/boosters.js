@@ -43,6 +43,7 @@ module.exports = {
     } = message
     const members = guild.members.cache.filter(m => m.premiumSinceTimestamp
  !== null).map(m => m)
+    if(members.length == 0) return message.reply({content: `No Boosters`})
 
     /**
      * Creates an embed with members starting from an index.

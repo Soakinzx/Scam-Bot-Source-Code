@@ -11,7 +11,7 @@ module.exports = {
   usage: ["$invite"],
   run: async (client, message, args) => {
     let embed = new Discord.MessageEmbed()
-    .setDescription(`Support Me By Inviting Me To Your Server!`)
+    .setDescription(`Support Me By Inviting Me To Your Server Or Voting!`)
     .setThumbnail(client.user.displayAvatarURL({dynamic: true}))
     .setTimestamp()
     .setFooter(`${client.user.id}`, client.user.displayAvatarURL({dynamic: true}))
