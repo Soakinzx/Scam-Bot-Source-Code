@@ -14,9 +14,9 @@ const client = new Discord.Client({
   intents: 32767,
   partials: ["MESSAGE", "CHANNEL", "USER", "REACTION"]
 });
-
+const functions = require("./functions.js")
 const fs = require("fs");
-
+const gdb = require("./Models/Guild")
 const { Api } = require("@top-gg/sdk")
 client.topgg = new Api(config.topgg_token, this)
 
@@ -99,7 +99,7 @@ client.guild_schema = {
   disabled_commands: [],
   logs_channel: null,
   log_events: {
-      "role_update": true,
+      "role_updated": true,
       "member_kicked": true,
       "member_banned": true,
       "member_unbanned": true,
@@ -161,7 +161,8 @@ client.guild_schema = {
   whitelistrole: null,
   trusted: [],
   trustrole: null,
-  quarantinerole: null
+  quarantinerole: null,
+  boosters_lost: []
 }
 //add antinukesettings, bot logs channel, quartine role to all fields
 /*
@@ -216,8 +217,6 @@ client.on("guildRemove", async guild => {
 //Welcome/Leave Modals Submit Events
 client.on("interactionCreate", async (i) => {
   if (i.isModalSubmit()) {
-    let functions = require("./functions.js")
-    let gdb = require("./Models/Guild")
 
     if (i.customId == "welcome_modal") {
       let title = i.fields.getTextInputValue("title")
@@ -462,7 +461,40 @@ client.on("interactionCreate", async (i) => {
   }
 })
 
+//LOGS EVENT
+client.on("", async () => {
+    let guild = ""
+    if(!guild) return
+    let data = await functions.getdb({_id: guild.id})
+    let log_event = "role_updated"
+    let log_settings = data.log_events
+    if(log_settings[log_event] == false) return;
+    let footer_image = ""
+    let author_image = ""
+    let embed = new MessageEmbed()
+    .setTitle(``)
+    .setDescription(``)
+    .setFooter(``, footer_image)
+    .setAuthor(``, author_image)
+    .setTimestamp()
+})
 
+client.on("", async () => {
+    let guild = ""
+    if(!guild) return
+    let data = await functions.getdb({_id: guild.id})
+    let log_event = ""
+    let log_settings = data.log_events
+    if(log_settings[log_event] == false) return;
+    let footer_image = ""
+    let author_image = ""
+    let embed = new MessageEmbed()
+    .setTitle(``)
+    .setDescription(``)
+    .setFooter(``, footer_image)
+    .setAuthor(``, author_image)
+    .setTimestamp()
+})
 
 const eventFiles = fs
   .readdirSync("./Events")
