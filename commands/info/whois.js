@@ -38,15 +38,11 @@ module.exports = {
   category: "info",
   description: "fetches info about a user",
   run: async (client, message, args) => {
-    const offSwitch = client.emojis.cache.find(
-      (ee) => ee.id === "988497460353724506"
-    );
+    const offSwitch ="<:scambot_toggle_on:1005586188343713843>"
 
-    const onSwitch = client.emojis.cache.find(
-      (e) => e.id === "988497446336339988"
-    );
+    const onSwitch = "<:scambot_toggle_off:1005586189107089520>"
     if(!args[0]){
-      args[0] = "None"
+      args[0] = "81828288193838383"
     }
   const user = message.mentions.users.first() || client.users.cache.get(args[0]) || client.users.cache.find(i => i.username.toLowerCase().startsWith(args.join(" ").toLowerCase())) || client.users.cache.find(i => i.tag.toLowerCase().startsWith(args.join(" ").toLowerCase())) || message.author
     const avatar = user.displayAvatarURL();
@@ -93,7 +89,7 @@ module.exports = {
       });
     } else {
       inserver = onSwitch;
-      const member = message.mentions.members.first() || message.member;
+      const member = message.guild.members.cache.get(user.id)
       let discord_perms = Object.keys(discord.Permissions.FLAGS)
       let permissions = []
       
@@ -111,7 +107,7 @@ module.exports = {
           permissions = "Too Many To Display..."
         }
       }
-      let roles = message.member.roles.cache.map(role => role)
+      let roles = member.roles.cache.map(role => role)
       if(roles.length == 0){
         roles = "None"
       } else {
