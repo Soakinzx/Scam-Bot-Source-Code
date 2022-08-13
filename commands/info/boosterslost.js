@@ -55,7 +55,7 @@ module.exports = {
     } = message
     const members = data.boosters_lost.map(d => {
         return {
-            member: message.guild.members.cache.get(d.id),
+            member: message.guild.members.cache.get(d.id) || "Unknown",
             date: d.date
         }
     })
