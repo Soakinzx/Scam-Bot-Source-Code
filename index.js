@@ -27,7 +27,7 @@ client.vote_required = ["holiday", "tiktok", "instagramprofile", "instagrampost"
 client.tum = []
 client.invite_link = "https://discord.com/oauth2/authorize?client_id=877168141355065404&permissions=1240658865402&scope=bot"
 client.vote_link = "https://top.gg/bot/877168141355065404"
-client.server_link = "https://discord.gg/sekor"
+client.server_link = "https://discord.gg/erasedx"
 client.editing_welcome = [],
 client.editing_leave = []
 client.guild_schema = {
