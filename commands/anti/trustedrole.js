@@ -8,7 +8,7 @@ module.exports = {
   name: "trustedrole",
   aliases: [],
   category: "anti",
-  permission: ["ADMINISTRATOR"],
+  permission: ["ADMINISTRATOR", "OWNER"],
   req_perms: ["SEND_MESSAGES"],
   usage: ["$trustedrole"],
   description: "see trusted role",

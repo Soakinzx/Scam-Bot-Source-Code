@@ -8,7 +8,7 @@ module.exports = {
   name: "whitelist",
   aliases: [],
   category: "anti",
-  permission: ["ADMINISTRATOR"],
+  permission: ["ADMINISTRATOR", "SERVER_TRUSTED"],
   req_perms: ["SEND_MESSAGES"],
   usage: ["$whitelist <user>"],
   description: "whitelist a user from antinuke, antilink, antialt, antibot, antialt",
@@ -35,15 +35,7 @@ module.exports = {
       _id: message.guild.id
     })
     if (!data) {
-      let role = message.guild.roles.cache.get(data.trustrole)
-      if(!role){
-        role = "Not Set"
-      } else {
-        role = role.name
-      }
-      if (message.member.id !== message.guild.ownerId && !message.member.roles.cache.has(data.trustrole) && !data.trusted.includes(message.author.id)) return message.reply({
-          content: `You do not have the required trust role \`${role}\` and You are not on the trusted list and You are not the owner of this server`
-      })
+      
       gs.whitelisted = [user.id]
       data = new gdb(gs)
       data.save()
@@ -52,15 +44,7 @@ module.exports = {
         content: `Whitelisted \`${member.user.tag}\` protecting them from ${client.user.username} antinuke, antilink, antialt, antibot, antialt`
       })
     } else {
-      let role = message.guild.roles.cache.get(data.trustrole)
-      if(!role){
-        role = "Not Set"
-      } else {
-        role = role.name
-      }
-      if (message.member.id !== message.guild.ownerId && !message.member.roles.cache.has(data.trustrole) && !data.trusted.includes(message.author.id)) return message.reply({
-          content: `You do not have the required trust role \`${role}\` and You are not on the trusted list and You are not the owner of this server`
-      })
+      
       if (data.whitelisted.includes(member.id)) {
         data.whitelisted.splice(data.whitelisted.indexOf(member.id), 1)
         data.save()

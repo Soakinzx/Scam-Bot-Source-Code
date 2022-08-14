@@ -8,7 +8,7 @@ module.exports = {
   name: "whitelistedrole",
   aliases: [],
   category: "anti",
-  permission: ["ADMINISTRATOR"],
+  permission: ["ADMINISTRATOR", "SERVER_TRUSTED"],
   req_perms: ["SEND_MESSAGES"],
   usage: ["$whitelistedrole"],
   description: "see whitelisted role",
@@ -26,25 +26,20 @@ module.exports = {
       } else {
         role = role.name
       }
-      if (message.member.id !== message.guild.ownerId && !message.member.roles.cache.has(data.trustrole) && !data.trusted.includes(message.author.id)) return message.reply({
-          content: `You do not have the required trust role \`${role}\` and You are not on the trusted list and You are not the owner of this server`
-      })
       return message.reply({content: `Whitelisted Role Not Set`})
     } else {
-      let role = message.guild.roles.cache.get(data.trustrole)
+      
+      let role = message.guild.roles.cache.get(data.whitelistrole)
       if(!role){
         role = "Not Set"
       } else {
         role = role.name
       }
-      if (message.member.id !== message.guild.ownerId && !message.member.roles.cache.has(data.trustrole) && !data.trusted.includes(message.author.id)) return message.reply({
-          content: `You do not have the required trust role \`${role}\` and You are not on the trusted list and You are not the owner of this server`
-      })
       if(data.whitelistrole == null) return message.reply({content: `Whitelisted Role Not Set`})
       
       let embed = new MessageEmbed()
       .setTitle("Whitelisted Role")
-      .setDescription(`\`${role.name}\``)
+      .setDescription(`\`${role}\``)
       message.channel.send({embeds: [embed]})
     }
   },

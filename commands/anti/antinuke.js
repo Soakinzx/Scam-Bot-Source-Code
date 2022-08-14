@@ -8,7 +8,7 @@ module.exports = {
   name: "antinuke",
   aliases: [],
   category: "anti",
-  permission: ["ADMINISTRATOR"],
+  permission: ["ADMINISTRATOR", "SERVER_TRUSTED"],
   req_perms: ["SEND_MESSAGES", "ADMINISTRATOR"],
   usage: ["$antinuke"],
   description: "enable antinuke",
@@ -22,29 +22,13 @@ module.exports = {
     })
     
     if(!data){
-      let role = message.guild.roles.cache.get(data.trustrole)
-      if(!role){
-        role = "Not Set"
-      } else {
-        role = role.name
-      }
-      if (message.member.id !== message.guild.ownerId && !message.member.roles.cache.has(data.trustrole) && !data.trusted.includes(message.author.id)) return message.reply({
-          content: `You do not have the required trust role \`${role}\` and You are not on the trusted list and You are not the owner of this server`
-      })
+      
       gs.antinuke = true
       data = new gdb(gs)
       data.save()
       return message.reply({content: `antinuke Toggled \`${data.antinuke}\``})
     } else {
-      let role = message.guild.roles.cache.get(data.trustrole)
-      if(!role){
-        role = "Not Set"
-      } else {
-        role = role.name
-      }
-      if (message.member.id !== message.guild.ownerId && !message.member.roles.cache.has(data.trustrole) && !data.trusted.includes(message.author.id)) return message.reply({
-          content: `You do not have the required trust role \`${role}\` and You are not on the trusted list and You are not the owner of this server`
-      })
+      
       if(data.antinuke == true){
         data.antinuke = false
         message.reply({content: `antinuke Toggled \`${data.antinuke}\``})
