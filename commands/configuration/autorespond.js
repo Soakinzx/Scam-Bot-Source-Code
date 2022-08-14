@@ -1,5 +1,5 @@
 const Discord = require("discord.js")
-const print = console.log
+
 const db = require("../../Models/Guild");
 module.exports = {
     name: "autorespond",
@@ -45,6 +45,7 @@ module.exports = {
                             response: message2
                         }]
                     data = new db(gs)
+                    data.save()
                     message.channel.send({
                         content: "Auto reponse trigger & response set"
                     })
@@ -76,6 +77,7 @@ module.exports = {
                 if (err) throw err;
                 if (!data) {
                     data = new db(gs)
+                    data.save()
                     message.channel.send({
                         content: "Data of guild not found, created new data, please try this command again"
                     })
@@ -83,7 +85,7 @@ module.exports = {
                     if (data.Autorespond_messages.length >= 1) {
                         for (let i = 0; i < data.Autorespond_messages.length; i++) {
                             if (data.Autorespond_messages[i].trigger == message1) {
-                                console.log(data.Autorespond_messages[i].trigger + " : " + message1)
+                                
                                 data.Autorespond_messages.splice(i)
                                 data.save()
                                 return message.channel.send({
@@ -111,6 +113,7 @@ module.exports = {
                 if (err) throw err;
                 if (!data) {
                     data = new db(gs)
+                    data.save()
                     message.channel.send({
                         content: "Data of guild not found, created new data, please try this command again"
                     })
@@ -138,6 +141,7 @@ module.exports = {
                 if (err) throw err;
                 if (!data) {
                     data = new db(gs)
+                    data.save()
                     message.channel.send({
                         content: "Data of guild not found, created new data, please try this command again"
                     })
