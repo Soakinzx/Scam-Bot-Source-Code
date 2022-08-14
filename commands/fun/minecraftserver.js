@@ -2,13 +2,13 @@ const request = require("request")
 const functions = require("../../functions.js")
 const Discord = require("discord.js")
 module.exports = {
-  name: "dict",
+  name: "minecraftserver",
   category: "fun",
-  aliases: ["dictionary"],
+  aliases: [],
   permission: [],
   req_perms: ["SEND_MESSAGES"],
-  description: "search a word on the dictonary",
-  usage: ["$dict <word>"],
+  description: "get info on a minecraft server",
+  usage: ["$minecraftserver <server ip>"],
   run: async (client, message, args) => {
     const ip = args.join(" ")
     const url = "https://mcapi.us/server/status?ip="+ip
