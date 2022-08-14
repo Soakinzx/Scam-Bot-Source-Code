@@ -83,7 +83,7 @@ module.exports = {
         new MessageButton()
         .setLabel("Done")
         .setCustomId("done")
-        .setStyle("DANGER")
+        .setStyle("PRIMARY")
       )
 
     let msg = await message.channel.send({
@@ -106,6 +106,7 @@ module.exports = {
         if(client.editing_leave.includes(i.user.id)){
           client.editing_leave.splice(client.editing_leave.indexOf(i.user.id),1)
         }
+        i.component.setStyle("DANGER")
         collector.stop()
         return i.reply({content: "leave Message Editor Stopped"})
       } else if (i.customId == "embed") {
