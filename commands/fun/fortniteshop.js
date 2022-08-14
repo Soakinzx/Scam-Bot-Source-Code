@@ -5,15 +5,10 @@ module.exports = {
     category: "fun",
     permission: [],
     req_perms: ["SEND_MESSAGES"],
-    description: "see current fortniteshop",
+    description: "see current fortnite shop",
     usage: ["$fortniteshop"],
     run: async (client, message, args) => {
-        let embed = {
-            title: "Fortnite Shop",
-            image: {
-                url: "https://ctk-api.herokuapp.com/fortnite-shop"
-            }
-        }
-        return message.channel.send({embeds: [embed]})
+        message.channel.send({content: "Fortnite Shop"})
+        return message.channel.send({content: "https://ctk-api.herokuapp.com/fortnite-shop"})
     },
 }
