@@ -45,9 +45,8 @@ module.exports = {
                             response: message2
                         }]
                     data = new db(gs)
-                    data.save()
                     message.channel.send({
-                        content: "Auto reponse trigger & response set"
+                        content: `Auto reponse trigger(\`${message1}\`) & response(\`${message2}\`) set`
                     })
                 } else {
                     for (const info of data.Autorespond_messages) {
@@ -62,7 +61,7 @@ module.exports = {
                         response: message2
                     })
                     message.channel.send({
-                        content: "Auto reponse trigger & response set"
+                        content: `Auto reponse trigger(\`${message1}\`) & response(\`${message2}\`) set`
                     })
                 }
                 data.save()
@@ -77,9 +76,8 @@ module.exports = {
                 if (err) throw err;
                 if (!data) {
                     data = new db(gs)
-                    data.save()
                     message.channel.send({
-                        content: "Data of guild not found, created new data, please try this command again"
+                        content: "No triggers exist"
                     })
                 } else {
                     if (data.Autorespond_messages.length >= 1) {
@@ -113,9 +111,8 @@ module.exports = {
                 if (err) throw err;
                 if (!data) {
                     data = new db(gs)
-                    data.save()
                     message.channel.send({
-                        content: "Data of guild not found, created new data, please try this command again"
+                        content: "No triggers exist"
                     })
                 } else {
                     if (data.Autorespond_messages.length >= 1) {
@@ -141,9 +138,8 @@ module.exports = {
                 if (err) throw err;
                 if (!data) {
                     data = new db(gs)
-                    data.save()
                     message.channel.send({
-                        content: "Data of guild not found, created new data, please try this command again"
+                        content: "No triggers exist"
                     })
                 } else {
                     if (data.Autorespond_messages.length >= 1) {
