@@ -52,10 +52,9 @@ module.exports = {
           text: `👍 ${vid.stats.diggCount} 💬 ${vid.stats.commentCount} 👁️ ${vid.stats.playCount} | ${vid.id}`
         }
       }
+      message.channel.send({content: resVideo.data.body.info.itemInfo.itemStruct.video.playAddr})
         message.channel.send({
             embeds: [embed]
-        }).then(m => {
-          message.channel.send({content: `${resVideo.data.body.info.itemInfo.itemStruct.video.playAddr}`})
         })
     }
 }
