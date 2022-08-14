@@ -38,9 +38,9 @@ module.exports = {
   category: "info",
   description: "fetches info about a user",
   run: async (client, message, args) => {
-    const offSwitch ="<:scambot_toggle_on:1005586188343713843>"
+    const offSwitch ="<:scambot_toggle_off:1005586189107089520>"
 
-    const onSwitch = "<:scambot_toggle_off:1005586189107089520>"
+    const onSwitch = "<:scambot_toggle_on:1005586188343713843>"
     if(!args[0]){
       args[0] = "81828288193838383"
     }
