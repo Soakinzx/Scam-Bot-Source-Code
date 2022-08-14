@@ -127,15 +127,15 @@ module.exports = {
               missing_perms.push(command.permission[i])
             }
           } else if(command.permission[i] == "SERVER_TRUSTED") {
-            if(!data){
+            if(!guild_data){
               missing_perms.push(command.permission[i])
-            } else if(message.member.id !== message.guild.ownerId && !message.member.roles.cache.has(data.trustrole) && !data.trusted.includes(message.member.id)) {
+            } else if(message.member.id !== message.guild.ownerId && !message.member.roles.cache.has(guild_data.trustrole) && !guild_data.trusted.includes(message.member.id)) {
               missing_perms.push(command.permission[i])
             }
           } else if(command.permission[i] == "SERVER_WHITELISTED") {
-            if(!data){
+            if(!guild_data){
               missing_perms.push(command.permission[i])
-            } else if(message.member.id !== message.guild.ownerId && !message.member.roles.cache.has(data.trustrole) && !data.trusted.includes(message.member.id) && !data.whitelisted.includes(mesage.member.id) && !message.member.roles.cache.has(data.whitelistrole)) {
+            } else if(message.member.id !== message.guild.ownerId && !message.member.roles.cache.has(guild_data.trustrole) && !guild_data.trusted.includes(message.member.id) && !guild_data.whitelisted.includes(message.member.id) && !message.member.roles.cache.has(guild_data.whitelistrole)) {
               missing_perms.push(command.permission[i])
             }
           } else {
