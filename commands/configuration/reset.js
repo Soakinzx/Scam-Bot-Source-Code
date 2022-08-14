@@ -35,7 +35,7 @@ module.exports = {
     )
     let embed = {
       title: "Confirmation",
-      description: "Are You Sure You Want To Reset This Servers Saved Data Including `Save User Roles List, Auto Roles List, Prefix, Welcome Channel, Welcome Message, Join To Create Channel, Status Roles, Status Message, PokeHelper, Auto Untimeout Toggle List`"
+      description: "Are You Sure You Want To Reset This Servers Data Saved By Scam Including `Configurations, Anti, Info, Etc.`"
     }
 
     let msg = await message.reply({embeds: [embed], components: [row]})
