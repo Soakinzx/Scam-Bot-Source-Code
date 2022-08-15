@@ -75,7 +75,8 @@ module.exports = {
       w: '.--',
       x: '-..-',
       y: '-.--',
-      z: '--..'
+      z: '--..',
+      " ": "~"
     }
 
     function letter2Morse(t) {
