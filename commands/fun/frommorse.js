@@ -82,7 +82,7 @@ module.exports = {
       let morse = "";
       for(i = 0; i < t.length; i++) {
         if(morse_letters[t[i]]) {
-          morse += morse_letters(t[i]) + " ";
+          morse += morse_letters[t[i]] + " ";
         } else {
           morse += t[i] + " "
         }
