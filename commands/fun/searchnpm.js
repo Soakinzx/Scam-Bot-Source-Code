@@ -6,7 +6,7 @@ module.exports = {
   aliases: ["npmsearch"],
   category: "fun",
   permission: [],
-  usage: ["$searchnpm"],
+  usage: ["$searchnpm <package>"],
   req_perms: ["SEND_MESSAGES"],
   description: "search for an npm package",
   run: async (client, message, args) => {
