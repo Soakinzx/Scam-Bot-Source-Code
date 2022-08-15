@@ -14,32 +14,6 @@ module.exports = {
       content: "Argument Missing: `morse code`"
     })
     let morse_letters = {
-      ".-": "A",
-      "-...": "B",
-      "-.-.": "C",
-      "-..": "D",
-      ".": "E",
-      "..-.": "F",
-      "--.": "G",
-      "....": "H",
-      "..": "I",
-      ".---": "J",
-      "-.-": "K",
-      ".-..": "L",
-      "--": "M",
-      "-.": "N",
-      "---": "O",
-      ".--.": "P",
-      "--.-": "Q",
-      ".-.": "R",
-      "...": "S",
-      "-": "T",
-      "..-": "U",
-      "...-": "V",
-      ".--": "W",
-      "-..-": "X",
-      "-.--": "Y",
-      "--..": "Z",
       "-----": "0",
       ".----": "1",
       "..---": "2",
@@ -75,21 +49,22 @@ module.exports = {
       '.--': 'w',
       '-..-': 'x',
       '-.--': 'y',
-      '--..': 'z'
+      '--..': 'z',
+      "~": " "
     };
 
     function morseletter2Text(t) {
       let morse = "";
-      for(i = 0; i < t.length; i++) {
+      for(let i = 0; i < t.length; i++) {
         if(morse_letters[t[i]]) {
-          morse += morse_letters[t[i]] + " ";
+          morse += morse_letters[t[i]];
         } else {
-          morse += t[i] + " "
+          morse += t[i]
         }
       }
       return morse
     }
-    let text = functions.text_block(morseletter2Text(args.join(" ")))
+    let text = functions.text_block(morseletter2Text(args))
     if(text.length <= 4000) {
       return message.reply({
         content: text
