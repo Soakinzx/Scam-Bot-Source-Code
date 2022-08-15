@@ -44,18 +44,11 @@ module.exports = {
       "y": "𝐲",
       "z": "𝐳",
     }
-    let list_text = [...text]
-    for(let i=0;i<list_text.length;i++){
-      if(!["'", "+", " ", "-", ",", "."].includes(list_text[i])) {
-        list_text[i] = letters[text[i]]
-      } else {
-        continue
-      }
-    }
+   
     
     let embed = new discord.MessageEmbed
     embed.setColor("DARK_BUT_NOT_BLACK")
-    embed.setDescription(list_text.join(""))
+    embed.setDescription(text)
     message.channel.send({embeds:[embed]})
     
   }
