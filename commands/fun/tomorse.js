@@ -49,16 +49,42 @@ module.exports = {
       W: '.--',
       X: '-..-',
       Y: '-.--',
-      Z: '--..'
+      Z: '--..',
+      a: '.-',
+      b: '-...',
+      c: '-.-.',
+      d: '-..',
+      e: '.',
+      f: '..-.',
+      g: '--.',
+      h: '....',
+      i: '..',
+      j: '.---',
+      k: '-.-',
+      l: '.-..',
+      m: '--',
+      n: '-.',
+      o: '---',
+      p: '.--.',
+      q: '--.-',
+      r: '.-.',
+      s: '...',
+      t: '-',
+      u: '..-',
+      v: '...-',
+      w: '.--',
+      x: '-..-',
+      y: '-.--',
+      z: '--..'
     }
 
     function letter2Morse(t) {
       let morse = "";
       for(i = 0; i < t.length; i++) {
         if(morse_letters[t[i]]) {
-            morse += morse_letters(t[i]) + " ";
+          morse += morse_letters(t[i]) + " ";
         } else {
-            morse += t[i]+" "
+          morse += t[i] + " "
         }
       }
       return morse
