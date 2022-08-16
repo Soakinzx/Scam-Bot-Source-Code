@@ -45,7 +45,7 @@ module.exports = {
       .setDescription(`**Watching** \`${client.guilds.cache.size}\` Servers\n**Watching** \`${client.users.cache.size}\` Users\n**Uptime** ${convert(client.uptime)}\n**Server** - [link](${client.server_link})\n**Invite** - [link](${client.invite_link})\n**Vote** - [link](${client.vote_link})\n**Libary** discord.js\n`)
       .addField(`Owners`, functions.text_block(`${client.owners.slice(1, client.owners.length).map(id => {
         if(id == dev){
-          return `${client.users.cache.get(id).tag}(devoloper)`
+          return `${client.users.cache.get(id).tag}(developer)`
         } else {
           return client.users.cache.get(id).tag
         }
