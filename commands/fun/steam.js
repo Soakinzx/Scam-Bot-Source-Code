@@ -17,7 +17,7 @@ module.exports = {
     request(`https://api.popcat.xyz/steam?q=${args.join("20%")}`, async (err, res, body) => {
       if(err) return;
       let json = JSON.parse(body)
-      let embed = new discord.MessageEmbed
+      let embed = new discord.MessageEmbed()
       if(json.error) {
         embed.setTitle("Error")
         embed.setDescription(json.error)
