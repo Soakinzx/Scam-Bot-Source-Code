@@ -25,6 +25,7 @@ module.exports = {
       } else {
         embed.color = "DARK_BUT_NOT_BLACK"
         embed.title = json.name
+        embed.description = json.description
         if(json.website !== "None"){
             embed.url = json.website
         }
