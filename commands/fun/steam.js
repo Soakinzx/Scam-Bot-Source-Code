@@ -24,9 +24,9 @@ module.exports = {
       } else {
         embed.setColor("DARK_BUT_NOT_BLACK")
         embed.setTitle(`${json.name}`)
-        embed.setThumbnail(json.banner)
-        embed.setURL(json.website)
-        embed.setImage(json.thumbnail)
+        (json.website !== "None")?embed.setURL(json.website): null
+        (json.thumbnail !== "None")?embed.setImage(json.thumbnail): null
+        (json.banner !== "None")?embed.setThumbnail(json.banner): null
         embed.addFields(
         {
             name: "App Info",
