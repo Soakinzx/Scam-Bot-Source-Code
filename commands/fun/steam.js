@@ -19,7 +19,6 @@ module.exports = {
       let json = JSON.parse(body)
       
       let embed = {}
-      console.log(json)
       if(json.error) {
         embed.title = "Error"
         embed.description = json.error
