@@ -17,22 +17,30 @@ module.exports = {
     request(`https://api.popcat.xyz/steam?q=${args.join("20%")}`, async (err, res, body) => {
       if(err) return;
       let json = JSON.parse(body)
-      let embed = new discord.MessageEmbed()
+      
+      let embed = {}
+      console.log(json)
       if(json.error) {
-        embed.setTitle("Error")
-        embed.setDescription(json.error)
+        embed.title = "Error"
+        embed.description = json.error
       } else {
-        embed.setColor("DARK_BUT_NOT_BLACK")
-        embed.setTitle(`${json.name}`)
-        (json.website !== "None")?embed.setURL(json.website): null
-        (json.thumbnail !== "None")?embed.setImage(json.thumbnail): null
-        (json.banner !== "None")?embed.setThumbnail(json.banner): null
-        embed.addFields(
+        embed.color = "DARK_BUT_NOT_BLACK"
+        embed.title = json.name
+        if(json.website !== "None"){
+            embed.url = json.website
+        }
+        if(json.thumbnail !== "None"){
+            embed.image = {url:json.thumbnail}
+        }
+        if(json.banner !== "None"){
+            embed.thumbnail = {url:json.banner}
+        }
+        embed.fields = [
         {
             name: "App Info",
             value: `**Type:** \`${json.type}\`\n**Developers:** \`${(json.developers)?json.developers.join(", "):"None"}\`\n**Publishers:** \`${(json.publishers)?json.publishers.join(", "):"None"}\`\n**Price:** \`${json.price}\``,
             inline: true
-        })
+        }]
       }
       message.channel.send({
         embeds: [embed]
