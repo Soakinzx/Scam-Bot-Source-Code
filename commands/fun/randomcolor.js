@@ -17,7 +17,7 @@ module.exports = {
       let json = JSON.parse(body)
       let embed = new discord.MessageEmbed
       embed.setColor(json.hex)
-      embed.setTitle(`${json.name} | ${json.text}`)
+      embed.setTitle(`${json.name} | ${json.hex}`)
       embed.setImage(json.image)
       message.channel.send({
         embeds: [embed]
