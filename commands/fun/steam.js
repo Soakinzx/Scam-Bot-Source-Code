@@ -30,7 +30,7 @@ module.exports = {
         embed.addFields(
         {
             name: "App Info",
-            value: `**Type:** \`${json.type}\`\n**Devolopers:** \`${json.devolopers.join(", ")}\`\n**Publishers:** \`${json.publishers.join(", ")}\`\n**Price:** \`${json.price}\``,
+            value: `**Type:** \`${json.type}\`\n**Devolopers:** \`${(json.devolopers)?json.devolopers.join(", "):"None"}\`\n**Publishers:** \`${(json.publishers)?json.publishers.join(", "):"None"}\`\n**Price:** \`${json.price}\``,
             inline: true
         })
       }
