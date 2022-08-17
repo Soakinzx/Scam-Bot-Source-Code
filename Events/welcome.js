@@ -75,10 +75,10 @@ module.exports = {
           }
           data.author = data.author
         }
-        if(!data.thumbnail.url.startsWith("https") && !data.thumbnail.url.startsWith("http")){
+        if(data.thumbnail && data.thumbnail.url && !data.thumbnail.url.startsWith("https") && !data.thumbnail.url.startsWith("http")){
             data.thumbnail.url = "https://"+data.thumbnail.url
         }
-        if(!data.image.url.startsWith("https") && !data.image.url.startsWith("http")){
+        if(data.image && data.image.url && !data.image.url.startsWith("https") && !data.image.url.startsWith("http")){
             data.image.url = "https://"+data.image.url
         }
         return data
