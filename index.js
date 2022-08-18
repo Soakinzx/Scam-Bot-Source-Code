@@ -17,6 +17,8 @@ const client = new Discord.Client({
 const functions = require("./functions.js")
 const fs = require("fs");
 const gdb = require("./Models/Guild")
+const Enmap = require("enmap");
+
 const { Api } = require("@top-gg/sdk")
 client.topgg = new Api(config.topgg_token, this)
 
@@ -164,6 +166,15 @@ client.guild_schema = {
   quarantinerole: null,
   boosters_lost: []
 }
+client.user_schema = {
+    level: 1,
+    current_xp: 0,
+    xp_required: 1000
+}
+client.userdb = new Enmap({
+    name: "UserDb",
+    dataDir: "./databases/UserDb"
+})
 //add antinukesettings, bot logs channel, quartine role to all fields
 /*
 db.guilds.updateMany({}, {$set: {antinukesettings: {
@@ -206,7 +217,7 @@ client.on("guildCreate", async guild => {
 
 
 
-client.on("guildRemove", async guild => {
+client.on("guildDelete", async guild => {
   let lch = client.channels.cache.get("989039370491269160")
   lch.send({
     content: `<@765201883157495860> Left\nServer: ${guild.name}\nUser Count: ${guild.members.cache.size}\nID: ${guild.id}`
