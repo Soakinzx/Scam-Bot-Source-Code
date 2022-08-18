@@ -1,6 +1,6 @@
 
 const Discord = require("discord.js")
-require("discord-banner")();
+
 
 module.exports = {
   name: "banner",
@@ -11,30 +11,20 @@ module.exports = {
   description: "show users banner",
   usage: ["$banner <optional: user>"],
   run: async (client, message, args) => {
-  if(!args){
-    args[0] = "None"
+  if(!args[0]){
+    args[0] = message.author.id
   }
   const user = message.mentions.users.first() || client.users.cache.get(args[0]) || client.users.cache.find(i => i.username.toLowerCase().startsWith(args.join(" ").toLowerCase())) || client.users.cache.find(i => i.tag.toLowerCase().startsWith(args.join(" ").toLowerCase())) || message.author
-    
-   const { getUserBanner } = require("discord-banner");
-
-getUserBanner(user.id, {
-  token: process.env.token,
-}).then(banner => {
-  let str = banner.url.substr(54, 56)
   
-  let format = (str.substr(0,2) == "a_") ? "gif" : "png"
-  str = banner.url.replace("png", format)
+  let banner = await user.fetch(user.banner)
+  if(!banner.bannerURL()) return message.reply({content: `**${user.tag}** banner not found`})
   
   let embed = new Discord.MessageEmbed()
-    .setTitle(user.username + "'s Banner")
+    .setTitle(user.tag + "'s Banner")
     .setColor("DARK_BUT_NOT_BLACK")
-    .setImage(str)
-    .setURL(str)
+    .setImage(banner.bannerURL({dynamic: true, size: 4096}))
+    .setURL(banner.bannerURL({dynamic: true, size: 4096}))
   
   message.channel.send({embeds:[embed]})
-} ).catch(err => {
-  return message.reply({content: "User banner not found"})
-}) 
 },
 }
