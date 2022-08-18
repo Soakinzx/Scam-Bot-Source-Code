@@ -167,9 +167,20 @@ client.guild_schema = {
   boosters_lost: []
 }
 client.user_schema = {
+    birthday: {
+        month: null,
+        day: null
+    },
+    timezone: null,
     level: 1,
-    current_xp: 0,
-    xp_required: 1000
+    xp: 0,
+    xp_required: 1000,
+    marriage: {
+        married_since: null,
+        children: []
+    },
+    name_history: [],
+    tag_history: []
 }
 client.userdb = new Enmap({
     name: "UserDb",
