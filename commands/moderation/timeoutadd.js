@@ -16,13 +16,13 @@ module.exports = {
     const onSwitch = client.emojis.cache.find(
       (e) => e.id === "988497446336339988"
     );
-    let u = "usernotfound+++scambotcode"
-    if(!args[0]){
-      u = args.join(" ")
-    }
+    if (!args.length) return message.reply({
+      content: "Argument Missing: `@member`"
+    })
+    let u = args[0]
     const member = message.mentions.members.first() || message.guild.members.cache.get(u) || message.guild.members.cache.find(m => m.user.username.startsWith(u.toLowerCase())) || message.guild.members.cache.find(m => m.user.tag.startsWith(u.toLowerCase()))
     if (!member) return message.reply({
-      content: "Argument missing: `@member`"
+      content: "Argument Invalid: `@member`"
     })
     
     if (member == message.member) return message.reply({
