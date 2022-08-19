@@ -3,7 +3,7 @@ const Discord = require("discord.js")
 
 module.exports = {
   name: "invite",
-  aliases: ["support"],
+  aliases: ["support", "vote"],
   permission: [],
   req_perms: ["SEND_MESSAGES"],
   category: "info",
