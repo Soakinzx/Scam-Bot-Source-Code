@@ -489,7 +489,7 @@ client.on("userUpdate", function(oldUser, newUser){
             client.userdb.set(oldUser.id, arr, "name_history")
         } 
     }
-    if(oldUser.tag !== newUser.tag) {
+    if(oldUser.discriminator !== newUser.discriminator) {
         let data = client.userdb.get(oldUser.id)
         if(!data) {
             let us = functions.cloneobj(client.user_schema)
@@ -498,7 +498,7 @@ client.on("userUpdate", function(oldUser, newUser){
         } else {
             let arr = data.tag_history
             arr.push({old_tag: `#${oldUser.discriminator}`, new_tag: `#${newUser.discriminator}`, date: Date.now()})
-            client.userdb.set(oldUser.id, arr, "name_history")
+            client.userdb.set(oldUser.id, arr, "tag_history")
         } 
     }
 });
