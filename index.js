@@ -477,6 +477,7 @@ client.on("interactionCreate", async (i) => {
 })
 
 client.on("userUpdate", function(oldUser, newUser){
+    if(oldUser.bot) return
     if(oldUser.username !== newUser.username) {
         let data = client.userdb.get(oldUser.id)
         if(!data) {
