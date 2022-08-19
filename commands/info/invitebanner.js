@@ -1,13 +1,13 @@
 
 const Discord = require("discord.js")
 module.exports = {
-  name: "serverbanner",
-  aliases: ["sb"],
+  name: "invitebanner",
+  aliases: ["ib"],
   permission: [],
   req_perms: ["SEND_MESSAGES"],
   category: "info",
-  description: "shows server banner",
-  usage: ["$serverbanner"],
+  description: "shows server invite banner",
+  usage: ["$invitebanner"],
   run: async (client, message, args) => {
     let banner = message.guild.splashURL({size: 4096, dynamic: true, format: "webp"})
     if(!banner) return message.reply({content: `Server Does Not Have A Invite Banner`})
