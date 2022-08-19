@@ -9,7 +9,7 @@ module.exports = {
   description: "shows server banner",
   usage: ["$serverbanner"],
   run: async (client, message, args) => {
-    let banner = message.guild.bannerURL({size: 2048, dynamic: true, format: "webp"})
+    let banner = message.guild.bannerURL({size: 4096, dynamic: true, format: "webp"})
     if(!banner) return message.reply({content: `Server Does Not Have A Server Banner`})
     let row = new Discord.MessageActionRow()
     row.components.push(new Discord.MessageButton().setStyle("LINK").setLabel("Server Banner").setURL(banner))
