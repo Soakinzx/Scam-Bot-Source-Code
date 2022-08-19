@@ -212,7 +212,7 @@ module.exports = client
 
 client.once("ready", async () => {
   console.log("Client has Logged on!");
-  client.user.setActivity(".gg/morii", {
+  client.user.setActivity(`${client.users.cache.size} Users`, {
     type: "STREAMING",
     url: "https://www.twitch.tv/boredisjustcool"
   });
