@@ -20,7 +20,8 @@ module.exports = {
     if(args[0]) {
       u = args.join(" ")
     }
-    let member = message.mentions.members.first() || message.guild.members.cache.get(u) || message.guild.members.cache.find(m => m.user.username.startsWith(u.toLowerCase())) || message.guild.members.cache.find(m => m.user.tag.startsWith(u.toLowerCase()))
+    let member = message.mentions.members.first() || message.guild.members.cache.get(u) || message.guild.members.cache.find(m => m.user.username.startsWith(u.toLowerCase())) || message.guild.members.cache.find(m => m.user.tag.startsWith(u.toLowerCase())) || message.author
+    if(!member) return message.reply({content: "Argument Invalid: `@user`"})
     let data = client.userdb.get(member.id)
     if(!data || data.name_history.length == 0) return message.reply({
       content: `No Name History Found`
