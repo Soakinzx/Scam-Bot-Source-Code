@@ -15,38 +15,61 @@ module.exports = {
     if(!url) return message.reply({
       content: "Argument Missing: `url`"
     })
-    if(!functions.isValidUrl(url)) return message.reply({
-      content: "Argument Invalid: `url: must be a valid url`"
-    })
-    
+
     request({
       method: 'GET',
       url: url
-    }, async (err,res,body) => {
+    }, async (err, res, body) => {
+      if(err) {
         let embed = {
-            title: "Request",
-            footer: {
-                text: `Status ${(res && res.statusCode) ? res.statusCode : "Unknown"}`
-            }
+          title: "Request",
+          description: `${err}`,
+          footer: {
+            text: `Status ${(res && res.statusCode) ? res.statusCode : "Unknown"}`
+          }
         }
-        if(!res || res.statusCode !== 200) {
-            if(!err) {
-                embed.description = `**Could not send request to url with status code:** \`${(res && res.statusCode) ? res.statusCode : "Unknown"}\``
-            } else {
-                embed.description = `**Could not send request to url error (\`${err}\`) with status code:** \`${(res && res.statusCode) ? res.statusCode : "Unknown"}\``
-            }
+        return message.channel.send({
+          embeds: [embed]
+        })
+      }
+      let embed = {
+        title: "Request",
+        footer: {
+          text: `Status ${(res && res.statusCode) ? res.statusCode : "Unknown"}`
+        }
+      }
+      if(!res || res.statusCode !== 200) {
+        if(!err) {
+          embed.description = `**Could not send request to url with status code:** \`${(res && res.statusCode) ? res.statusCode : "Unknown"}\``
         } else {
-            let src;
-            try {
-                src = await sourcebin.create([{content: `${body}`, language: "html"}], {title: "HTML", description: "HTML Fetched From URL"})
-            } catch(err) {
-                src = await sourcebin.create([{content: `${err}`, language: "text"}], {title: "Error", description: "Error Fetching HTML"})
-            }
-            
-            embed.description = `**Successfully sent a request to url with status code:** \`${(res && res.statusCode) ? res.statusCode : "Unknown"}\`\n**HTML Fetched** - [Here](${src.url})`
+          embed.description = `**Could not send request to url error (\`${err}\`) with status code:** \`${(res && res.statusCode) ? res.statusCode : "Unknown"}\``
         }
-        return message.channel.send({embeds: [embed]})
-        
+      } else {
+        let src;
+        try {
+          src = await sourcebin.create([{
+            content: `${body}`,
+            language: "html"
+          }], {
+            title: "HTML",
+            description: "HTML Fetched From URL"
+          })
+        } catch (err) {
+          src = await sourcebin.create([{
+            content: `${err}`,
+            language: "text"
+          }], {
+            title: "Error",
+            description: "Error Fetching HTML"
+          })
+        }
+
+        embed.description = `**Successfully sent a request to url with status code:** \`${(res && res.statusCode) ? res.statusCode : "Unknown"}\`\n**HTML Fetched** - [Here](${src.url})`
+      }
+      return message.channel.send({
+        embeds: [embed]
+      })
+
     })
   }
 }
