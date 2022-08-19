@@ -18,6 +18,7 @@ module.exports = {
   req_perms: ["SEND_MESSAGES"],
   description: "birthday command",
   run: async (client, message, args) => {
+      let us = functions.cloneobj(client.user_schema)
     if(!args[0]) return message.reply({
       content: "Argument Missing: `action: supported actions: set, status`"
     })
@@ -52,12 +53,14 @@ module.exports = {
           content: 'Argument Invalid: `day number: must be a number from 1-31`'
         });
       }
-      let us = functions.cloneobj(client.user_schema)
 
       if(!client.userdb.get(message.author.id)) {
-          us.birthday.month = month
-          us.birthday.day = day
-          client.userdb.set(message.author.id, us)
+          
+          
+          client.userdb.set(message.author.id, client.user_schema)
+          client.userdb.set(message.author.id, month, "birthday.month")
+          client.userdb.set(message.author.id, day, "birthday.day")
+          console.log(client.user_schema)
       } else {
           client.userdb.set(message.author.id, month, "birthday.month")
           client.userdb.set(message.author.id, day, "birthday.day")
