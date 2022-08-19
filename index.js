@@ -32,6 +32,7 @@ client.vote_link = "https://top.gg/bot/877168141355065404"
 client.server_link = "https://discord.gg/erasedx"
 client.editing_welcome = [],
 client.editing_leave = []
+client.clashroyale_api_key = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImY4Yzc5NjZkLTU2NDYtNDJiZi05MzEwLTdjZGQ5OGJlZTVjZSIsImlhdCI6MTY2MDkzOTgyNywic3ViIjoiZGV2ZWxvcGVyL2YzMTNjOGIxLTZmY2UtZTAzMy1mYTE4LWU0MWNhN2MxYmRkMSIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyI4OC4xOTguMzcuMTA3Il0sInR5cGUiOiJjbGllbnQifV19.pNl7wV5LxzooAGYg_qYxUYJz89gOHOv4vnLpkXzUe-gqdjs9yTzv7G5HpWMuFL8ZyZLQtE8an-0ieP2-bt5CXA"
 client.guild_schema = {
   _id: null,
   Autorespond_messages: [],
