@@ -10,7 +10,7 @@ function convert(date) {
   return `${days}d ${hours}h ${mins}m ${secs}s`
 }
 function format(string) {
-  let parts = string.split(" ")
+  let parts = string.replaceAll("_", " ").split(" ")
   for (let i = 0; i < parts.length; i++) {
     parts[i] = parts[i].slice(0, 1).toUpperCase() + parts[i].slice(1).toLowerCase()
   }
@@ -33,6 +33,8 @@ module.exports = {
   run: async (client, message, args, config) => {
     let max_stickers = 5
     let max_emojis = 50
+    let vanityurl = "None"
+    let vanityurluses = "0"
       let tier = (message.guild.premiumTier == "NONE") ? "TIER_0" : message.guild.premiumTier
       if(tier == "TIER_1") {
         max_stickers = 15
@@ -45,6 +47,16 @@ module.exports = {
       if(tier == "TIER_3") {
         max_stickers = 60
         max_emojis = 250
+        let vd = await message.guild.fetchVanityData()
+        if(vd.code) {
+            vanityurl = `.gg/${vd.code}`
+        }
+        if(vd.uses) {
+            vanityurluses = `${vd.uses}`
+        }
+      } else {
+          vanityurl = "Server Not Level 3"
+          vanityurluses = "Server Not Level 3"
       }
     
     const mct = message.guild.memberCount;
@@ -71,7 +83,7 @@ module.exports = {
     });
     let roles;
     if (arr2.join(" ").length > 1024) {
-      emoji = functions.text_block("Too many roles to display");
+      roles = functions.text_block("Too many roles to display");
     } else {
       roles = arr2.join(" ");
     }
@@ -84,9 +96,11 @@ module.exports = {
       row.components.push(new discord.MessageButton().setStyle("LINK").setLabel("Server Logo").setURL(ServerLogo))
     }
     
+    
 
     const embed = new MessageEmbed()
       .setTitle("Server info")
+      .setDescription(message.guild.description || "No Description")
       .setColor("DARK_BUT_NOT_BLACK")
       .setImage(ServerLogo)
       .addFields(
@@ -116,9 +130,20 @@ module.exports = {
           inline: true
         },
         {
-          name: "Premium",
+          name: "Boosts",
           value: `${functions.text_block(`Tier: ${format(tier.replace(/_/g, " ")).split(" ")[1]}\nBoosts: ${message.guild.premiumSubscriptionCount
 }`)}`
+        },
+        {
+          name: "Vanity",
+          value: functions.text_block(`Vanity URL: ${vanityurl}\nVanity URL Uses: ${vanityurluses}`),
+          inline: true
+        },
+        {
+          name: "General",
+          value: functions.text_block(`NSFW Level: ${message.guild.nsfwLevel}\nMFA Level: ${message.guild.mfaLevel}\nVerification Level: ${message.guild.verificationLevel}\nVerified: ${message.guild.verified}\nMax Members: ${message.guild.maximumMembers}\nMax Bitrate: ${message.guild.maximumBitrate}\nContent Filter: ${message.guild.explicitContentFilter
+}\nDefault Notifications: ${format(message.guild.defaultMessageNotifications
+)}`)
         },
         {
         name: `Roles(${message.guild.roles.cache.size - 1})`,
