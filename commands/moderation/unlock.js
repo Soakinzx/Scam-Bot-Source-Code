@@ -32,7 +32,7 @@ module.exports = {
     } else {
       return message.reply({content: `\`${channel.name}\` is not a supported channel`})
     }
-    return message.reply({content: `\`${channel.name}\` is now unlocked 🔓`})
+    return message.reply({content: `\`${channel.name}\` is now unlocked <:scambot_unlock:1010059319099793429>`})
     
   },
 }
