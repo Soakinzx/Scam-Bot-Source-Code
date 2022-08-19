@@ -481,9 +481,10 @@ client.on("userUpdate", function(oldUser, newUser){
     if(oldUser.username !== newUser.username) {
         let data = client.userdb.get(oldUser.id)
         if(!data) {
-            let us = functions.cloneobj(client.user_schema)
-            us.name_history.push({old_username: oldUser.username, new_username: newUser.username, date: Date.now()})
-            client.userdb.set(oldUser.id, us)
+            let arr = []
+            arr.push({old_username: oldUser.username, new_username: newUser.username, date: Date.now()})
+            client.userdb.set(oldUser.id, client.user_schema)
+            client.userdb.set(oldUser.id, arr, "name_history")
         } else {
             let arr = data.name_history
             arr.push({old_username: oldUser.username, new_username: newUser.username, date: Date.now()})
