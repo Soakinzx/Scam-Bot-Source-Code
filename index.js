@@ -172,9 +172,6 @@ client.user_schema = {
         day: null
     },
     timezone: null,
-    level: 1,
-    xp: 0,
-    xp_required: 1000,
     marriage: {
         married_since: null,
         children: []
@@ -216,8 +213,6 @@ client.once("ready", async () => {
     type: "STREAMING",
     url: "https://www.twitch.tv/boredisjustcool"
   });
-  let db = require("./Models/Guild")
-  
 })
 client.on("guildCreate", async guild => {
   let lch = client.channels.cache.get("989039370491269160")
@@ -225,8 +220,6 @@ client.on("guildCreate", async guild => {
     content: `<@765201883157495860> Joined\nServer: ${guild.name}\nUser Count: ${guild.members.cache.size}\nID: ${guild.id}`
   })
 })
-
-
 
 client.on("guildDelete", async guild => {
   let lch = client.channels.cache.get("989039370491269160")
@@ -483,6 +476,32 @@ client.on("interactionCreate", async (i) => {
   }
 })
 
+client.on("userUpdate", function(oldUser, newUser){
+    if(oldUser.username !== newUser.username) {
+        let data = client.userdb.get(oldUser.id)
+        if(!data) {
+            let us = functions.cloneobj(client.user_schema)
+            us.name_history.push({old_username: oldUser.username, new_username: newUser.username, date: Date.now()})
+            client.userdb.set(oldUser.id, us)
+        } else {
+            let arr = data.name_history
+            arr.push({old_username: oldUser.username, new_username: newUser.username, date: Date.now()})
+            client.userdb.set(oldUser.id, arr, "name_history")
+        } 
+    }
+    if(oldUser.tag !== newUser.tag) {
+        let data = client.userdb.get(oldUser.id)
+        if(!data) {
+            let us = functions.cloneobj(client.user_schema)
+            us.tag_history.push({old_tag: oldUser.tag, new_tag: newUser.tag, date: Date.now()})
+            client.userdb.set(oldUser.id, us)
+        } else {
+            let arr = data.tag_history
+            arr.push({old_tag: oldUser.tag, new_tag: newUser.tag, date: Date.now()})
+            client.userdb.set(oldUser.id, arr, "name_history")
+        } 
+    }
+});
 //LOGS EVENT
 client.on("", async () => {
     let guild = ""
