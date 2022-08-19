@@ -16,7 +16,7 @@ module.exports = {
       return urls.push(img.url)
     })
     if (urls[0]) {
-      let url = `https://nekobot.xyz/api/imagegen?type=magik&image=${urls[0].replace(".webp", ".jpg")}`
+      let url = `https://nekobot.xyz/api/imagegen?type=magik&image=${urls[0].replace(".webp", ".jpg")}&intensity=${Math.floor(Math.random()* (10-1)+1)}`
       let res = await axios.get(url)
       let embed = {
         title: "Magik",
@@ -32,8 +32,9 @@ module.exports = {
       if(!args[0]) {
         u = message.member
       }
-      let url = `https://nekobot.xyz/api/imagegen?type=magik&image=${u.displayAvatarURL().replace(".webp", ".jpg")}`
+      let url = `https://nekobot.xyz/api/imagegen?type=magik&image=${u.displayAvatarURL().replace(".webp", ".jpg")}&intensity=${Math.floor(Math.random()* (10-1)+1)}`
       let res = await axios.get(url)
+      
       let embed = {
         title: "Magik",
         image: {
