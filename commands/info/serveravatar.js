@@ -2,7 +2,7 @@
 const Discord = require("discord.js")
 module.exports = {
   name: "serveravatar",
-  aliases: ["sav"],
+  aliases: ["sav", "servericon"],
   permission: [],
   req_perms: ["SEND_MESSAGES"],
   category: "info",
