@@ -33,7 +33,7 @@ module.exports = {
     } else {
       return message.reply({content: `\`${channel.name}\` is not a supported channel`})
     }
-    return message.reply({content: `\`${channel.name}\` is now locked 🔐`})
+    return message.reply({content: `\`${channel.name}\` is now locked <:scambot_lock:1010059320429400065>`})
     
   },
 }
