@@ -59,6 +59,7 @@ module.exports = {
             date: d.date
         }
     })
+    members.sort((a,b) => b.date-a.date)
     
     /**
      * Creates an embed with members starting from an index.
