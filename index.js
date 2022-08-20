@@ -1,4 +1,3 @@
-
 //member prune
 
 //redo 
@@ -216,16 +215,18 @@ client.once("ready", async () => {
   });
 })
 client.on("guildCreate", async guild => {
+  if(!guild || !guild.name || !guild.ownerId) return;
   let lch = client.channels.cache.get("989039370491269160")
   lch.send({
-    content: `<@765201883157495860> Joined\nServer: ${guild.name}\nUser Count: ${guild.members.cache.size}\nID: ${guild.id}`
+    embeds: [{description: `Joined **${guild.name}** owned by **${guild.members.cache.get(guild.ownerId).user.tag}** with **${guild.members.cache.size}** members`, footer: {text: `ID: ${guild.id}`}}]
   })
 })
 
 client.on("guildDelete", async guild => {
+  if(!guild || !guild.name || !guild.ownerId) return
   let lch = client.channels.cache.get("989039370491269160")
   lch.send({
-    content: `<@765201883157495860> Left\nServer: ${guild.name}\nUser Count: ${guild.members.cache.size}\nID: ${guild.id}`
+    embeds: [{description: `Left **${guild.name}** owned by **${guild.members.cache.get(guild.ownerId).user.tag}** with **${guild.members.cache.size}** members`, footer: {text: `ID: ${guild.id}`}}]
   })
 })
 
