@@ -1,6 +1,17 @@
 const discord = require("discord.js")
 let functions = require("../../functions.js")
 const axios = require("axios")
+function convert(date) {
+  let ms = (Date.now() - date)
+  let secs = Math.floor(ms / 1000)
+  let mins = Math.floor(secs / 60)
+  let hours = Math.floor(mins / 60)
+  let days = Math.floor(hours / 24)
+  secs %= 60;
+  mins %= 60;
+  hours %= 24;
+  return `${days}d ${hours}h ${mins}m ${secs}s`
+}
 module.exports = {
   name: "clashroyale",
   aliases: [],
@@ -27,9 +38,9 @@ module.exports = {
       })
       let playertag = args[1].toUpperCase()
       if(playertag.startsWith("#")) {
-        playertag = playertag.replace("#", "%")
+        playertag = playertag.replace("#", "%23")
       } else {
-        playertag = "%" + playertag
+        playertag = "%23" + playertag
       }
       axios({
           method: "get",
@@ -134,7 +145,67 @@ module.exports = {
             }
           }
         })
-    } else {
+    } else if(action == "playerwarlog"){
+      if(!args[1]) return message.reply({
+        content: "Argument Missing: `player tag`"
+      })
+      let playertag = args[1].toUpperCase()
+      if(playertag.startsWith("#")) {
+        playertag = playertag.replace("#", "%23")
+      } else {
+        playertag = "%23" + playertag
+      }
+      axios({
+          method: "get",
+          url: `https://api.clashroyale.com/v1/players/${playertag}/battlelog`,
+          headers: {
+            "Authorization": `Bearer ${client.clashroyale_api_key}`
+          }
+        })
+        .then(res => {
+          if(res.status !== 200) {
+            let embed = {
+              title: "Error",
+              description: `**Try Again**`
+            }
+            return message.channel.send({
+              embeds: [embed]
+            })
+          } else {
+            let data = res.data
+            /*let embed = new discord.MessageEmbed()
+              .setTitle(`${data.name}'s Clash Royale Info`)
+              .setDescription(`**Player Tag:** \`${data.tag}\``)
+            */
+           if(data.length == 0) return message.reply({content: "No battle logs found"})
+
+          }
+        })
+        .catch(err => {
+          if(err) {
+            if(err.response.status == 400) {
+
+              let embed = {
+                title: "Error",
+                description: `**Message:** Player Not Found`
+              }
+              return message.channel.send({
+                embeds: [embed]
+              })
+            } else {
+              let data = err.response.data
+              let embed = {
+                title: "Error",
+                description: `**Reason:** ${data.reason}\n**Message:** ${data.message}`
+              }
+              return message.channel.send({
+                embeds: [embed]
+              })
+            }
+          }
+        })
+    } 
+    else {
         return message.reply({content: "Action being worked on..."})
     }
   }

@@ -31,7 +31,7 @@ let functions = require("../../functions.js")
 module.exports = {
   name: "roleinfo",
   aliases: ["ri"],
-  permission: [],
+  permission: ["MANAGE_ROLES"],
   req_perms: ["SEND_MESSAGES"],
   usage: ["$roleinfo <role>"],
   category: "info",

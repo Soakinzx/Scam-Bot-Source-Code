@@ -18,7 +18,7 @@ module.exports = {
       return urls.push(img.url)
     })
     if (urls[0]) {
-      let url = `https://api.popcat.xyz/colorify?image=${urls[0].replace(".webp", ".png").replace(".jpg", ".png")}&color=${color}`
+      let url = `https://api.popcat.xyz/colorify?image=${urls[0].replace(".webp", ".png").replace(".jpg", ".png")}&color=${color.replace("#", "")}`
       let embed = {
         title: "Colorified",
         image: {
@@ -33,7 +33,7 @@ module.exports = {
       if(!args[0]) {
         u = message.member
       }
-      let url = `https://api.popcat.xyz/colorify?image=${u.displayAvatarURL().replace(".webp", ".png").replace(".jpg", ".png")}&color=${color}`
+      let url = `https://api.popcat.xyz/colorify?image=${u.displayAvatarURL().replace(".webp", ".png").replace(".jpg", ".png")}&color=${color.replace("#", "")}`
       let embed = {
         title: "Colorified",
         image: {
