@@ -216,7 +216,7 @@ client.once("ready", async () => {
   });
 })
 client.on("guildCreate", async guild => {
-  if(!guild || !guild.name || !guild.ownerId) return
+  if(!guild || !guild.name || !guild.ownerId) return;
   let lch = client.channels.cache.get("989039370491269160")
   lch.send({
     embeds: [{description: `Joined **${guild.name}** owned by **${guild.members.cache.get(guild.ownerId).user.tag}** with **${guild.members.cache.size}** members`, footer: {text: `ID: ${guild.id}`}}]
