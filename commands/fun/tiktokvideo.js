@@ -45,13 +45,22 @@ module.exports = {
         title: "TikTok Video Info",
         description: vid.desc,
         fields: [
-          {name: "Author", value: `**Followers:** \`${vid.authorStats.followerCount}\`\n**Following:** \`${vid.authorStats.followingCount}\`\n**Likes:** \`${vid.authorStats.heartCount}\`\n**Videos:** \`${vid.authorStats.videoCount}\`\n**Nickname:** \`${vid.author.nickname}\`\n**Bio:** \`${vid.author.signature}\``, inline: true},
-          {name: "Video", value: `**Created:** \`${convert(vid.createTime)}\``}
+          {
+            name: "Author",
+            value: `<:scambot_reply2:1007492305726484550>**Followers:** \`${vid.authorStats.followerCount}\`\n<:scambot_reply2:1007492305726484550>**Following:** \`${vid.authorStats.followingCount}\`\n<:scambot_reply2:1007492305726484550>**Likes:** \`${vid.authorStats.heartCount}\`\n<:scambot_reply2:1007492305726484550>**Videos:** \`${vid.authorStats.videoCount}\`\n<:scambot_reply2:1007492305726484550>**Nickname:** \`${vid.author.nickname}\`\n<:scambot_reply:988497454120980500>**Bio:** \`${vid.author.signature}\``,
+            inline: true,
+          },
+          {
+            name: "Video",
+            value: `<:scambot_reply:988497454120980500>**Created:** \`${convert(
+              vid.createTime
+            )}\``,
+          },
         ],
         footer: {
-          text: `👍 ${vid.stats.diggCount} 💬 ${vid.stats.commentCount} 👁️ ${vid.stats.playCount} | ${vid.id}`
-        }
-      }
+          text: `👍 ${vid.stats.diggCount} 💬 ${vid.stats.commentCount} 👁️ ${vid.stats.playCount} | ${vid.id}`,
+        },
+      };
       message.channel.send({content: `||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​|| ${resVideo.data.body.info.itemInfo.itemStruct.video.playAddr}`})
         message.channel.send({
             embeds: [embed]

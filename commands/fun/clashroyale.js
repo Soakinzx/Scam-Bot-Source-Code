@@ -1,4 +1,5 @@
 const discord = require("discord.js");
+const { MessageEmbed, MessageButton, MessageActionRow } = require("discord.js");
 let functions = require("../../functions.js");
 const axios = require("axios");
 function convert(date) {
@@ -14,6 +15,7 @@ function convert(date) {
   return `${days}d ${hours}h ${mins}m ${secs}s`;
 }
 function format(string) {
+  string = string.replaceAll("_", " ");
   let parts = string.split(" ");
   for (let i = 0; i < parts.length; i++) {
     parts[i] =
@@ -39,7 +41,7 @@ module.exports = {
       "playercards",
       "playerdecks",
       "playerachievements",
-      "upcomingchest",
+      "playerupcomingchest",
       "claninfo",
       "clanmembers",
       "clancurrentwar",
@@ -112,33 +114,41 @@ module.exports = {
               .addFields([
                 {
                   name: "Stats",
-                  value: `**Level:** \`${data.expLevel}\`\n**XP:** \`${
+                  value: `<:scambot_reply2:1007492305726484550>**Level:** \`${
+                    data.expLevel
+                  }\`\n<:scambot_reply2:1007492305726484550>**XP:** \`${
                     data.expPoints
-                  }/${xp_perlevel[data.expLevel]}\`\n**Current Trophies:** \`${
+                  }/${
+                    xp_perlevel[data.expLevel]
+                  }\`\n<:scambot_reply2:1007492305726484550>**Current Trophies:** \`${
                     data.trophies
-                  }\`\n**Highest Trophies:** \`${
+                  }\`\n<:scambot_reply2:1007492305726484550>**Highest Trophies:** \`${
                     data.bestTrophies
-                  }\`\n**Wins/Losses:** \`${data.wins}/${
+                  }\`\n<:scambot_reply2:1007492305726484550>**Wins/Losses:** \`${
+                    data.wins
+                  }/${
                     data.losses
-                  }\`\n**Battles:** \`${
+                  }\`\n<:scambot_reply2:1007492305726484550>**Battles:** \`${
                     data.battleCount
-                  }\`\n**3 Crown Wins:** \`${
+                  }\`\n<:scambot_reply2:1007492305726484550>**3 Crown Wins:** \`${
                     data.threeCrownWins
-                  }\`\n**Challenge Cards Won:** \`${
+                  }\`\n<:scambot_reply2:1007492305726484550>**Challenge Cards Won:** \`${
                     data.challengeCardsWon
-                  }\`\n**Challenge Wins:** \`${
+                  }\`\n<:scambot_reply2:1007492305726484550>**Challenge Wins:** \`${
                     data.challengeMaxWins
-                  }\`\n**Tournament Cards Won:** \`${
+                  }\`\n<:scambot_reply2:1007492305726484550>**Tournament Cards Won:** \`${
                     data.tournamentCardsWon
-                  }\`\n**Tournaments Played:** \`${
+                  }\`\n<:scambot_reply2:1007492305726484550>**Tournaments Played:** \`${
                     data.tournamentBattleCount
-                  }\`\n**Donations:** \`${
+                  }\`\n<:scambot_reply2:1007492305726484550>**Donations:** \`${
                     data.donations
-                  }\`\n**Donations Recieved:** \`${
+                  }\`\n<:scambot_reply2:1007492305726484550>**Donations Recieved:** \`${
                     data.donationsReceived
-                  }\`\n**Total Donations:** \`${
+                  }\`\n<:scambot_reply2:1007492305726484550>**Total Donations:** \`${
                     data.totalDonations
-                  }\`\n**War Days Won:** \`${data.warDayWins}\`\n`,
+                  }\`\n<:scambot_reply:988497454120980500>**War Days Won:** \`${
+                    data.warDayWins
+                  }\`\n`,
                   inline: true,
                 },
                 {
@@ -148,7 +158,7 @@ module.exports = {
                 },
                 {
                   name: "Clan",
-                  value: `**Tag:** \`${data.clan.tag}\`\n**Clan Name:** \`${data.clan.name}\`\n**Clan Badge ID:** \`${data.clan.badgeId}\`\n**Clan Cards Collected:** \`${data.clanCardsCollected}\`\n**Clan Role:** \`${data.role}\`\n`,
+                  value: `<:scambot_reply2:1007492305726484550>**Tag:** \`${data.clan.tag}\`\n<:scambot_reply2:1007492305726484550>**Clan Name:** \`${data.clan.name}\`\n<:scambot_reply2:1007492305726484550>**Clan Badge ID:** \`${data.clan.badgeId}\`\n<:scambot_reply2:1007492305726484550>**Clan Cards Collected:** \`${data.clanCardsCollected}\`\n<:scambot_reply:988497454120980500>**Clan Role:** \`${data.role}\`\n`,
                   inline: true,
                 },
                 {
@@ -158,7 +168,7 @@ module.exports = {
                 },
                 {
                   name: "League Statistics",
-                  value: `**Current Season:**\n**Current Trophies:** \`${data.leagueStatistics.currentSeason.trophies}\`\n**Highest Trophies:** \`${data.leagueStatistics.currentSeason.bestTrophies}\`\n\n**Best Season:**\n**Trophies:** \`${data.leagueStatistics.bestSeason.trophies}\``,
+                  value: `<:scambot_reply2:1007492305726484550>**Current Season**\n<:scambot_reply3:1010631391307899000><:scambot_reply2:1007492305726484550>**Current Trophies:** \`${data.leagueStatistics.currentSeason.trophies}\`\n<:scambot_reply3:1010631391307899000><:scambot_reply:988497454120980500>**Highest Trophies:** \`${data.leagueStatistics.currentSeason.bestTrophies}\`\n<:scambot_reply3:1010631391307899000>\n<:scambot_reply:988497454120980500>**Best Season**\n\t <:scambot_reply:988497454120980500>**Trophies:** \`${data.leagueStatistics.bestSeason.trophies}\``,
                   inline: true,
                 },
                 {
@@ -168,7 +178,7 @@ module.exports = {
                 },
                 {
                   name: "Arena",
-                  value: `**Name:** ${data.arena.name}\n**Arena ID:** ${data.arena.id}`,
+                  value: `<:scambot_reply2:1007492305726484550>**Name:** ${data.arena.name}\n<:scambot_reply:988497454120980500>**Arena ID:** ${data.arena.id}`,
                   inline: true,
                 },
               ])
@@ -230,7 +240,7 @@ module.exports = {
             });
           } else {
             let playerdata = res.data;
-            let data = await axios({
+            let res2 = await axios({
               method: "get",
               url: `https://api.clashroyale.com/v1/players/${playertag}/battlelog`,
               headers: {
@@ -242,7 +252,7 @@ module.exports = {
               .setTitle(`${data.name}'s Clash Royale Info`)
               .setDescription(`**Player Tag:** \`${data.tag}\``)
             */
-            if (data.length == 0)
+            if (res2.data.length == 0)
               return message.reply({ content: "No battle logs found" });
 
             const backId = "back";
@@ -261,7 +271,7 @@ module.exports = {
             // Put the following code wherever you want to send the embed pages:
             const guild = message.guild;
             const { author, channel } = message;
-            let battlelogs = data;
+            let battlelogs = res2.data;
             /**
              * Creates an embed with battlelogs starting from an index.
              * @param {number} start The index to start from.
@@ -295,18 +305,21 @@ module.exports = {
                     name: "Battle Info",
                     value: `<:scambot_reply2:1007492305726484550>**Type:** \`${
                       current.type
-                    }\`\n<:scambot_reply2:1007492305726484550>**Battle Date:** \`${convert(
+                    }\`\n<:scambot_reply2:1007492305726484550>**Battle Date:** \`${new Date(
+                      battleTime
+                    ).toLocaleDateString("en-US")}(${convert(
                       new Date(battleTime)
-                    )}\`\n<:scambot_reply2:1007492305726484550>**Gamemode:** \`${
-                      current.gameMode.name
-                    }\`\n<:scambot_reply2:1007492305726484550>**Arena:** \`${
+                    )})\`\n<:scambot_reply2:1007492305726484550>**Gamemode:** \`${current.gameMode.name
+                      .replaceAll("_", "")
+                      .split(/(?=[A-Z])/)
+                      .join(
+                        " "
+                      )}\`\n<:scambot_reply2:1007492305726484550>**Arena:** \`${
                       current.arena.name
                     }\`\n<:scambot_reply2:1007492305726484550>**Deck Type:** \`${format(
-                      current.deckSelectionstr.split(/(?=[A-Z])/).join(" ")
-                    )}\`\n<:scambot_reply2:1007492305726484550>**Ladder Tournament?:** \`${
+                      current.deckSelection.split(/(?=[A-Z])/).join(" ")
+                    )}\`\n<:scambot_reply:988497454120980500>**Ladder Tournament?:** \`${
                       current.isLadderTournament ? "Yes" : "No"
-                    }\`\n<:scambot_reply:988497454120980500>**Hosted Match?:** \`${
-                      current.isHostedMatch ? "Yes" : "No"
                     }\``,
                     inline: true,
                   },
@@ -317,8 +330,27 @@ module.exports = {
                   }`,
                 },
               };
+              let i = 0;
+              current.opponent.forEach((opponent) => {
+                i++;
+                obj.fields.push({
+                  name: `Opponent #${i}`,
+                  value: `<:scambot_reply2:1007492305726484550>**Name:** \`${
+                    opponent.name
+                  }\`\n<:scambot_reply2:1007492305726484550>**Tag:** \`${
+                    opponent.tag
+                  }\`\n<:scambot_reply2:1007492305726484550>**Starting Trophies:** \`${
+                    opponent.startingTrophies
+                  }\`\n<:scambot_reply2:1007492305726484550>**After Trophies:** \`${
+                    opponent.startingTrophies + opponent.trophyChange
+                  }\`\n<:scambot_reply:988497454120980500>**Trophy Diffrence:** \`${
+                    opponent.trophyChange
+                  }\``,
+                  inline: true,
+                });
+              });
               if (current.type == "challenge") {
-                obj.description = `**${current.challengeTitle}**`
+                obj.description = `**${current.challengeTitle}**`;
               }
               return obj;
             };
@@ -341,7 +373,7 @@ module.exports = {
             // Collect button interactions (when a user clicks a button),
             // but only when the button as clicked by the original message author
             const collector = embedMessage.createMessageComponentCollector({
-              time: 60000,
+              time: 60000 * battlelogs.length,
               filter: ({ user }) => user.id === author.id,
             });
 
@@ -377,6 +409,7 @@ module.exports = {
         })
         .catch((err) => {
           if (err) {
+            console.log(err);
             if (err.response.status == 400) {
               let embed = {
                 title: "Error",
@@ -397,6 +430,57 @@ module.exports = {
             }
           }
         });
+    } else if (action == "playerupcomingchest") {
+      if (!args[1])
+        return message.reply({
+          content: "Argument Missing: `player tag`",
+        });
+      let playertag = args[1].toUpperCase();
+      if (playertag.startsWith("#")) {
+        playertag = playertag.replace("#", "%23");
+      } else {
+        playertag = "%23" + playertag;
+      }
+      axios({
+        method: "get",
+        url: `https://api.clashroyale.com/v1/players/${playertag}`,
+        headers: {
+          Authorization: `Bearer ${client.clashroyale_api_key}`,
+        },
+      }).then(async (res) => {
+        if (res.status !== 200) {
+          let embed = {
+            title: "Error",
+            description: `**Try Again**`,
+          };
+          return message.channel.send({
+            embeds: [embed],
+          });
+        } else {
+          let playerdata = res.data;
+          let res2 = await axios({
+            method: "get",
+            url: `https://api.clashroyale.com/v1/players/${playertag}/upcomingchests`,
+            headers: {
+              Authorization: `Bearer ${client.clashroyale_api_key}`,
+            },
+          });
+          let data = res2.data;
+          let i = 0;
+          let embed = {
+            title: `${playerdata.name}'s Upcoming Chest`,
+            description: data
+              .items.map((chest) => {
+                i++;
+                return `\`${i}\` **${chest.name}** • \`${
+                  chest.index == 0 ? "Next" : `+${chest.index}`
+                }\``;
+              })
+              .join("\n"),
+          };
+          return message.channel.send({ embeds: [embed] });
+        }
+      });
     } else {
       return message.reply({ content: "Action being worked on..." });
     }
