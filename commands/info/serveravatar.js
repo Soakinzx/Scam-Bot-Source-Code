@@ -33,7 +33,7 @@ module.exports = {
     row.components.push(
       new Discord.MessageButton()
         .setStyle("LINK")
-        .setLabel("Avatar")
+        .setLabel("Server Avatar")
         .setURL(
           member.displayAvatarURL({ format: "jpg", size: 4096, dynamic: true })
         )
